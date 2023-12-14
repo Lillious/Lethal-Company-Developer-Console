@@ -14,7 +14,7 @@
 
 ## Dependencies
 - https://github.com/Lillious/Lethal-Company-Mod-Library
-- https://github.com/LavaGang/MelonLoader **(Version 0.5.4)**
+- https://github.com/LavaGang/MelonLoader **(Version 0.6.1)**
 
 ## General
 Despite this game's growing popularity, a developer console has yet to be implemented. Lillious and .Zer0 have set out to create 
