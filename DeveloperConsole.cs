@@ -2,6 +2,7 @@
 using Lethal_Library;
 using MelonLoader;
 using Non_Lethal_Dev_Console;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ namespace Non_Lethal_Dev_Console
         private string result = "";
         private TMP_FontAsset GameFont;
         private PlayerControllerB CurrentPlayer;
+        private Terminal Terminal;
 
         private void CommandRunner(string command)
         {
@@ -44,7 +46,7 @@ namespace Non_Lethal_Dev_Console
                             "clear - Clears the command history\n" +
                             "help set - Shows available commands for 'set'\n" +
                             "help get - Shows available commands for 'get'\n" + 
-                            "drop_all_held_items <player number> - Drops all held items\n" +
+                            "help terminal - Shows available commands for the terminal\n" +
                             "Type 'help 2' to see next commands";
                         break;
                     }
@@ -54,7 +56,7 @@ namespace Non_Lethal_Dev_Console
                         // Displays the second page of 'help'
                         case "2":
                             result = "Commands:\n" +
-                            "This is the second page of help";
+                            "drop_all_held_items <player number> - Drops all held items";
                             break;
                         // Help section for 'set'
                         case "set":
@@ -102,8 +104,14 @@ namespace Non_Lethal_Dev_Console
                             result = "Commands:\n" +
                                 "get <player number> look_sensitivity - Returns the player's look sensitivity";
                             break;
+                        case "terminal":
+                            result = "Commands:\n" +
+                                "get_credits - Returns the credits available to spend";
+                            break;
                     }
                     break;
+
+                // PLAYER COMMANDS
 
                 // set <player> <property> <value>
                 case "set":
@@ -263,6 +271,24 @@ namespace Non_Lethal_Dev_Console
                         result = $"Dropped all held items in Player {args[1]} hand";
                         break;
                     }
+
+                // TERMINAL COMMANDS
+                case "terminal":
+                    if(Terminal is null)
+                    {
+                        result = "Error: Terminal not found (This has most likely happened because code was edited.)";
+                        break;
+                    }
+                    switch (args[1])
+                    {
+                        // What the player is requesting to do to the terminal
+                        case "get_credits":
+                            result = $"Credits: {LC_Lib.GetGroupCredits(Terminal)}";
+                            break;
+
+                    }
+                    break;
+                    
                 default:
                     result = "Error: Invalid Command";
                     break;
@@ -284,6 +310,7 @@ namespace Non_Lethal_Dev_Console
         {
             if (!isInGame) return;
             CurrentPlayer = LC_Lib.SearchForControlledPlayer();
+            Terminal = LC_Lib.GetTerminal();
             GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
             initialized = true;
         }
