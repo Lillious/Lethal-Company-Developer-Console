@@ -42,7 +42,8 @@ namespace Non_Lethal_Dev_Console
                         result = "Commands:\n" +
                             "help - Displays this message\n" +
                             "clear - Clears the command history\n" +
-                            "help set - Shows available commands for 'set'\n";
+                            "help set - Shows available commands for 'set'\n" +
+                            "help get - Shows available commands for 'get'";
                         break;
                     }
                     switch (args[1])
@@ -50,7 +51,14 @@ namespace Non_Lethal_Dev_Console
                         case "set":
                             result = "Commands:\n" +
                             "set health <value> - Sets the player's healh\n" +
-                            "set speed <value> - Sets the player's sprint speed\n";
+                            "set speed <value> - Sets the player's sprint speed\n" +
+                            "set jump <value> - Sets the player's jump force";
+                            break;
+                        case "get":
+                            result = "Commands:\n" +
+                            "get player health - Returns player's health\n" +
+                            "get player speed - Returns the player's speed\n" +
+                            "get player jump - Returns the player's jump force";
                             break;
                     }
                     break;
@@ -88,6 +96,17 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetPlayerSpeed(Player, float.Parse(args[2]));
                             result = $"Set Player's speed to {args[2]}";
                             break;
+                        // Set Current Player's Jump Force
+                        case "jump":
+                            if (Player is null)
+                            {
+                                result = "Error: Player is null";
+                                break;
+                            }
+
+                            LC_Lib.SetPlayerJumpForce(Player, float.Parse(args[2]));
+                            result = $"Set Player's jump force to {args[2]}";
+                            break;
                         default:
                             result = "Error: Invalid arguments";
                             break;
@@ -106,19 +125,30 @@ namespace Non_Lethal_Dev_Console
                     {
                         // If the player decides to get some value in relation to the player
                         case "player":
+                            // If the player only types "get player"
+                            if(args.Length == 2)
+                            {
+                                result = "Error: Invalid arguments";
+                                break;
+                            }
+
                             switch (args[2])
                             {
+                                // If player wants the player's health
                                 case "health":
                                     result = $"Player's Health: {LC_Lib.GetPlayerHealth(Player)}";
                                     break;
                                 case "speed":
                                     result = $"Player's Speed: {LC_Lib.GetPlayerSpeed(Player)}";
                                     break;
+                                case "jump":
+                                    result = $"Player's Jump Force: {LC_Lib.GetPlayerJumpForce(Player)}";
+                                    break;
                             }
-                            /*
-                             * This would be the section for when we implement things like "get door lockstatus" to return if a door is locked, get the weather = anything non player related
-                             */
                             break;
+                        /*
+                         * This would be the section for when we implement things like "get door lockstatus" to return if a door is locked, get the weather = anything non player related
+                         */
                         default:
                             result = "Error: Invalid arguments";
                             break;
