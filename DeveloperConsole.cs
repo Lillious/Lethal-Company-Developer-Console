@@ -50,7 +50,7 @@ namespace Non_Lethal_Dev_Console
                         case "set":
                             result = "Commands:\n" +
                             "set health <value> - Sets the player's healh\n" +
-                            "set sprint <value> - Sets the player's sprint speed\n";
+                            "set speed <value> - Sets the player's sprint speed\n";
                             break;
                     }
                     break;
