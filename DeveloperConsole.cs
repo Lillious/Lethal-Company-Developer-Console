@@ -20,11 +20,11 @@ namespace Non_Lethal_Dev_Console
         private List<string> CommandHistory = new List<string>();
         private Canvas DevConsole;
         static Library LC_Lib = new Library();
-        PlayerControllerB Player;
         private bool isInGame = false;
         private bool initialized = false;
         private string result = "";
         private TMP_FontAsset GameFont;
+        private PlayerControllerB CurrentPlayer;
 
         private void CommandRunner(string command)
         {
@@ -35,7 +35,7 @@ namespace Non_Lethal_Dev_Console
 
             switch (args[0])
             {
-                // Help Command
+                // help <command>
                 case "help":
                     if (args.Length == 1)
                     {
@@ -50,150 +50,103 @@ namespace Non_Lethal_Dev_Console
                     {
                         case "set":
                             result = "Commands:\n" +
-                            "set health <value> - Sets the player's healh\n" +
-                            "set speed <value> - Sets the player's sprint speed\n" +
-                            "set jump <value> - Sets the player's jump force\n" +
-                            "set climbspeed <value> - Sets the player's climb speed\n" +
-                            "set drunkness <value> - Sets the player's drunkness";
+                            "set <player number> health <value> - Sets the player's health\n" +
+                            "set <player number> speed <value> - Sets the player's sprint speed\n" +
+                            "set <player number> jump <value> - Sets the player's jump force\n" +
+                            "set <player number> climb_speed <value> - Sets the player's climb speed\n" +
+                            "set <player number> drunkness <value> - Sets the player's drunkness\n" +
+                            "set <player number> grab_distance <value> - Sets the player's grab distance";
                             break;
                         case "get":
                             result = "Commands:\n" +
-                            "get player health - Returns player's health\n" +
-                            "get player speed - Returns the player's speed\n" +
-                            "get player jump - Returns the player's jump force\n" +
-                            "get player climbspeed - Returns the player's climb speed\n" +
-                            "get player drunkness - Returns the player's drunkness";
+                            "get <player number> health - Returns player's health\n" +
+                            "get <player number> speed - Returns the player's speed\n" +
+                            "get <player number> jump - Returns the player's jump force\n" +
+                            "get <player number> climb_speed - Returns the player's climb speed\n" +
+                            "get <player number> drunkness - Returns the player's drunkness\n" +
+                            "get <player number> grab_distance - Returns the player's grab distance";
                             break;
                     }
                     break;
 
-                // Set command
+                // set <player> <property> <value>
                 case "set":
-                    // If the player only types two words ex. 'set health'
-                    if (args.Length < 3)
                     {
-                        result = "Error: Invalid arguments";
-                        break;
-                    }
-
-                    switch (args[1])
-                    {
-                        // Set Current Player's Health
-                        case "health":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            result = "Error: Player not found";
+                            break;
+                        }
+                        // If "player" is typed
+                        switch (args[2])
+                        {
+                            case "health":
+                                LC_Lib.SetPlayerHealth(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s health to {args[3]}";
                                 break;
-                            }
-
-                            LC_Lib.SetPlayerHealth(Player, int.Parse(args[2]));
-                            result = $"Set Player's health to {args[2]}";
-                            break;
-                        // Set Current Player's Speed
-                        case "speed":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
+                            case "speed":
+                                LC_Lib.SetPlayerSpeed(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s speed to {args[3]}";
                                 break;
-                            }
-
-                            LC_Lib.SetPlayerSpeed(Player, float.Parse(args[2]));
-                            result = $"Set Player's speed to {args[2]}";
-                            break;
-                        // Set Current Player's Jump Force
-                        case "jump":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
+                            // Set Current Player's Jump Force
+                            case "jump":
+                                LC_Lib.SetPlayerJumpForce(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s jump force to {args[3]}";
                                 break;
-                            }
-
-                            LC_Lib.SetPlayerJumpForce(Player, float.Parse(args[2]));
-                            result = $"Set Player's jump force to {args[2]}";
-                            break;
-                        // Set Current Player's Climb Speed
-                        case "climbspeed":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
+                            // Set Current Player's Climb Speed
+                            case "climb_speed":
+                                LC_Lib.SetClimbSpeed(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s climb speed to {args[3]}";
                                 break;
-                            }
-
-                            LC_Lib.SetClimbSpeed(Player, float.Parse(args[2]));
-                            result = $"Set Player's climb speed to {args[2]}";
-                            break;
-                        // Set Current Player's Drunkness
-                        case "drunkness":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
+                            // Set Current Player's Drunkness
+                            case "drunkness":
+                                LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s drunkness to {args[3]}";
                                 break;
-                            }
-
-                            LC_Lib.SetDrunkness(Player, float.Parse(args[2]));
-                            result = $"Set Player's drunkness to {args[2]}";
-                            break;
-
-                        default:
-                            result = "Error: Invalid arguments";
-                            break;
+                            // Set Current Player's Grab Distance
+                            case "grab_distance":
+                                LC_Lib.SetGrabDistance(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Grab Distance to {args[3]}";
+                                break;
+                        }
                     }
                     break;
 
+                // get <player> <property>
                 case "get":
-                    // If the player only types the word get
-                    if(args.Length == 1)
                     {
-                        result = "Error: Invalid arguments";
-                        break;
-                    }
-
-                    switch (args[1])
-                    {
-                        // If the player decides to get some value in relation to the player
-                        case "player":
-                            // If the player only types "get player"
-                            if(args.Length == 2)
-                            {
-                                result = "Error: Invalid arguments";
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            result = "Error: Player not found";
+                            break;
+                        }
+                        switch (args[2])
+                        {
+                            case "health":
+                                result = $"Player {args[1]}'s health is {LC_Lib.GetPlayerHealth(Player)}";
                                 break;
-                            }
-
-                            switch (args[2])
-                            {
-                                // Returns the player's health
-                                case "health":
-                                    result = $"Player's Health: {LC_Lib.GetPlayerHealth(Player)}";
-                                    break;
-                                // Returns the player's speed
-                                case "speed":
-                                    result = $"Player's Speed: {LC_Lib.GetPlayerSpeed(Player)}";
-                                    break;
-                                // Returns the player's jump force
-                                case "jump":
-                                    result = $"Player's Jump Force: {LC_Lib.GetPlayerJumpForce(Player)}";
-                                    break;
-                                // Returns the player's climb speed
-                                case "climbspeed":
-                                    result = $"Player's Climb Speed: {LC_Lib.GetClimbSpeed(Player)}";
-                                    break;
-                                // Returns the player's drunkness
-                                case "drunkness":
-                                    result = $"Player's Drunkness: {LC_Lib.GetDrunkness(Player)}";
-                                    break;
-                            }
-                            break;
-                        /*
-                         * This would be the section for when we implement things like "get door lockstatus" to return if a door is locked, get the weather = anything non player related
-                         */
-                        default:
-                            result = "Error: Invalid arguments";
-                            break;
+                            case "speed":
+                                result = $"Player {args[1]}'s speed is {LC_Lib.GetPlayerSpeed(Player)}";
+                                break;
+                            // Returns the player's jump force
+                            case "jump":
+                                result = $"Player {args[1]}'s Jump Force: {LC_Lib.GetPlayerJumpForce(Player)}";
+                                break;
+                            // Returns the player's climb speed
+                            case "climb_speed":
+                                result = $"Player {args[1]}'s Climb Speed: {LC_Lib.GetClimbSpeed(Player)}";
+                                break;
+                            // Returns the player's drunkness
+                            case "drunkness":
+                                result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
+                                break;
+                            case "grab_distance":
+                                result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
+                                break;
+                        }
                     }
-                    break;
-
-                default:
-                    result = "Error: Invalid command";
                     break;
             }
 
@@ -212,9 +165,9 @@ namespace Non_Lethal_Dev_Console
         private void Initialize()
         {
             if (!isInGame) return;
-            initialized = true;
-            Player = LC_Lib.GetPlayer("Player");
+            CurrentPlayer = LC_Lib.SearchForControlledPlayer();
             GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
+            initialized = true;
         }
 
         public override void OnUpdate()
@@ -269,12 +222,13 @@ namespace Non_Lethal_Dev_Console
                         if (DevConsole.gameObject.activeInHierarchy)
                         {
                             DevConsole.gameObject.SetActive(false);
-                            Player.enabled = true;
+
+                            CurrentPlayer.enabled = true;
                         }
                         else
                         {
                             DevConsole.gameObject.SetActive(true);
-                            Player.enabled = false;
+                            CurrentPlayer.enabled = false;
                             CommandInput.Select();
                             CommandInput.ActivateInputField();
                         }
