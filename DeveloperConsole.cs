@@ -21,6 +21,7 @@ namespace Non_Lethal_Dev_Console
         private Canvas DevConsole;
         static Library LC_Lib = new Library();
         PlayerControllerB Player;
+        Terminal Terminal;
         private bool isInGame = false;
         private bool initialized = false;
         private string result = "";
@@ -37,24 +38,28 @@ namespace Non_Lethal_Dev_Console
             {
                 // Help Command
                 case "help":
-                    result = "Commands:\n" +
-                        "help - Displays this message\n" +
-                        "clear - Clears the command history\n" +
-                        "set - Shows the commands available for set\n";
+                    if (args.Length == 1)
+                    {
+                        result = "Commands:\n" +
+                            "help - Displays this message\n" +
+                            "clear - Clears the command history\n" +
+                            "help set - Shows available commands for 'set'\n";
+                        break;
+                    }
+                    switch (args[1])
+                    {
+                        case "set":
+                            result = "Commands:\n" +
+                            "set health <value> - Sets the player's healh\n" +
+                            "set sprint <value> - Sets the player's sprint speed\n";
+                            break;
+                    }
                     break;
 
                 // Set command
                 case "set":
-                    // If the player types 'set' to show commands
-                    if (args.Length == 1)
-                    {
-                        result = "Commands:\n" +
-                            "set health <value> - Sets the player's healh\n" +
-                            "set sprint <value> - Sets the player's sprint speed\n";
-                        break;
-                    }
                     // If the player only types two words ex. 'set health'
-                    if (args.Length > 1 && args.Length != 3)
+                    if (args.Length < 3)
                     {
                         result = "Error: Invalid arguments\n";
                         break;
@@ -111,6 +116,7 @@ namespace Non_Lethal_Dev_Console
             if (!isInGame) return;
             initialized = true;
             Player = LC_Lib.GetPlayer("Player");
+            Terminal = LC_Lib.GetTerminal();
             GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
         }
 
