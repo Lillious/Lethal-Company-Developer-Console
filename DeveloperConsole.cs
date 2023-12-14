@@ -53,14 +53,16 @@ namespace Non_Lethal_Dev_Console
                             "set health <value> - Sets the player's healh\n" +
                             "set speed <value> - Sets the player's sprint speed\n" +
                             "set jump <value> - Sets the player's jump force\n" +
-                            "set climbspeed <value> - Sets the player's climb speed";
+                            "set climbspeed <value> - Sets the player's climb speed\n" +
+                            "set drunkness <value> - Sets the player's drunkness";
                             break;
                         case "get":
                             result = "Commands:\n" +
                             "get player health - Returns player's health\n" +
                             "get player speed - Returns the player's speed\n" +
                             "get player jump - Returns the player's jump force\n" +
-                            "get player climbspeed - Returns the player's climb speed";
+                            "get player climbspeed - Returns the player's climb speed\n" +
+                            "get player drunkness - Returns the player's drunkness";
                             break;
                     }
                     break;
@@ -120,6 +122,17 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetClimbSpeed(Player, float.Parse(args[2]));
                             result = $"Set Player's climb speed to {args[2]}";
                             break;
+                        // Set Current Player's Drunkness
+                        case "drunkness":
+                            if (Player is null)
+                            {
+                                result = "Error: Player is null";
+                                break;
+                            }
+
+                            LC_Lib.SetDrunkness(Player, float.Parse(args[2]));
+                            result = $"Set Player's drunkness to {args[2]}";
+                            break;
 
                         default:
                             result = "Error: Invalid arguments";
@@ -148,21 +161,25 @@ namespace Non_Lethal_Dev_Console
 
                             switch (args[2])
                             {
-                                // If player wants the player's health
+                                // Returns the player's health
                                 case "health":
                                     result = $"Player's Health: {LC_Lib.GetPlayerHealth(Player)}";
                                     break;
-                                // If player wants the player's speed
+                                // Returns the player's speed
                                 case "speed":
                                     result = $"Player's Speed: {LC_Lib.GetPlayerSpeed(Player)}";
                                     break;
-                                // If player wants the player's jump force
+                                // Returns the player's jump force
                                 case "jump":
                                     result = $"Player's Jump Force: {LC_Lib.GetPlayerJumpForce(Player)}";
                                     break;
-                                // If player wants the player's climb speed
+                                // Returns the player's climb speed
                                 case "climbspeed":
                                     result = $"Player's Climb Speed: {LC_Lib.GetClimbSpeed(Player)}";
+                                    break;
+                                // Returns the player's drunkness
+                                case "drunkness":
+                                    result = $"Player's Drunkness: {LC_Lib.GetDrunkness(Player)}";
                                     break;
                             }
                             break;
