@@ -48,6 +48,7 @@ namespace Non_Lethal_Dev_Console
                     }
                     switch (args[1])
                     {
+                        // Help section for 'set'
                         case "set":
                             result = "Commands:\n" +
                             "set <player number> health <value> - Sets the player's health\n" +
@@ -55,8 +56,14 @@ namespace Non_Lethal_Dev_Console
                             "set <player number> jump <value> - Sets the player's jump force\n" +
                             "set <player number> climb_speed <value> - Sets the player's climb speed\n" +
                             "set <player number> drunkness <value> - Sets the player's drunkness\n" +
-                            "set <player number> grab_distance <value> - Sets the player's grab distance";
+                            "Type 'help set2' for next commands";    
                             break;
+                        case "set2":
+                            result = "Commands:\n" +
+                                "set <player number> grab_distance <value> - Sets the player's grab distance\n" +
+                                "set <player number> exhaust - Sets if the player is exhausted";
+                            break;
+                        // Help section for 'get'
                         case "get":
                             result = "Commands:\n" +
                             "get <player number> health - Returns player's health\n" +
@@ -64,7 +71,12 @@ namespace Non_Lethal_Dev_Console
                             "get <player number> jump - Returns the player's jump force\n" +
                             "get <player number> climb_speed - Returns the player's climb speed\n" +
                             "get <player number> drunkness - Returns the player's drunkness\n" +
-                            "get <player number> grab_distance - Returns the player's grab distance";
+                            "Type 'help get2' for next commands";
+                            break;
+                        case "get2":
+                            result = "Commands:\n" +
+                                "get <player number> grab_distance - Returns the player's grab distance\n" +
+                                "get <player number> exhaust - Returns if the player is exhausted";
                             break;
                     }
                     break;
@@ -78,36 +90,42 @@ namespace Non_Lethal_Dev_Console
                             result = "Error: Player not found";
                             break;
                         }
-                        // If "player" is typed
                         switch (args[2])
                         {
+                            // Sets the Player's Health
                             case "health":
                                 LC_Lib.SetPlayerHealth(Player, int.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s health to {args[3]}";
                                 break;
+                            // Sets the Player's Speed
                             case "speed":
                                 LC_Lib.SetPlayerSpeed(Player, int.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s speed to {args[3]}";
                                 break;
-                            // Set Current Player's Jump Force
+                            // Sets the Player's Jump Force
                             case "jump":
                                 LC_Lib.SetPlayerJumpForce(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s jump force to {args[3]}";
                                 break;
-                            // Set Current Player's Climb Speed
+                            // Sets the Player's Climb Speed
                             case "climb_speed":
                                 LC_Lib.SetClimbSpeed(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s climb speed to {args[3]}";
                                 break;
-                            // Set Current Player's Drunkness
+                            // Sets the Player's Drunkness
                             case "drunkness":
                                 LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s drunkness to {args[3]}";
                                 break;
-                            // Set Current Player's Grab Distance
+                            // Sets the Player's Grab Distance
                             case "grab_distance":
                                 LC_Lib.SetGrabDistance(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Grab Distance to {args[3]}";
+                                break;
+                            // Sets the Player's Exhaustion
+                            case "exhaust":
+                                LC_Lib.SetExhaustion(Player, bool.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
                                 break;
                         }
                     }
@@ -124,9 +142,11 @@ namespace Non_Lethal_Dev_Console
                         }
                         switch (args[2])
                         {
+                            // Returns the player's health
                             case "health":
                                 result = $"Player {args[1]}'s health is {LC_Lib.GetPlayerHealth(Player)}";
                                 break;
+                            // Returns the player's speed
                             case "speed":
                                 result = $"Player {args[1]}'s speed is {LC_Lib.GetPlayerSpeed(Player)}";
                                 break;
@@ -142,8 +162,13 @@ namespace Non_Lethal_Dev_Console
                             case "drunkness":
                                 result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
                                 break;
+                            // Returns the player's grab distance
                             case "grab_distance":
                                 result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
+                                break;
+                            // Returns the player's exhaustion
+                            case "exhaust":
+                                result = $"Player {args[1]}'s Exhaustion: {LC_Lib.GetExhaustion(Player)}";
                                 break;
                         }
                     }
