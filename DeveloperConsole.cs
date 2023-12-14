@@ -26,7 +26,7 @@ namespace Non_Lethal_Dev_Console
         private string result = "";
         private TMP_FontAsset GameFont;
 
-        private void CommandRunner (string command)
+        private void CommandRunner(string command)
         {
             if (string.IsNullOrEmpty(command)) return;
             command = command.ToLower();
@@ -37,13 +37,27 @@ namespace Non_Lethal_Dev_Console
             {
                 // Help Command
                 case "help":
-                    result = "Commands:\n" +
-                        "help - Displays this message\n" +
-                        "clear - Clears the command history\n" +
-                        "set - Sets a value\n" +
-                        "set health <value> - Sets the player's health\n";
+                    if (args.Length == 1)
+                    {
+                        result = "Commands:\n" +
+                            "help - Displays this message\n" +
+                            "clear - Clears the command history\n" +
+                            "help set - Shows available commands for 'set'\n";
+                        break;
+                    }
+                    switch (args[1])
+                    {
+                        case "set":
+                            result = "Commands:\n" +
+                            "set health <value> - Sets the player's healh\n" +
+                            "set speed <value> - Sets the player's sprint speed\n";
+                            break;
+                    }
                     break;
+
+                // Set command
                 case "set":
+                    // If the player only types two words ex. 'set health'
                     if (args.Length < 3)
                     {
                         result = "Error: Invalid arguments";
@@ -63,6 +77,7 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetPlayerHealth(Player, int.Parse(args[2]));
                             result = $"Set Player's health to {args[2]}";
                             break;
+                        // Set Current Player's Speed
                         case "speed":
                             if (Player is null)
                             {
@@ -72,12 +87,12 @@ namespace Non_Lethal_Dev_Console
 
                             LC_Lib.SetPlayerSpeed(Player, int.Parse(args[2]));
                             result = $"Set Player's speed to {args[2]}";
-                            break;  
+                            break;
                         default:
                             result = "Error: Invalid arguments";
                             break;
                     }
-                break;
+                    break;
                 default:
                     result = "Error: Invalid command";
                     break;
@@ -130,7 +145,8 @@ namespace Non_Lethal_Dev_Console
                         {
                             CommandHistory.Clear();
                             CommandOutput.text = "";
-                        } else
+                        }
+                        else
                         {
                             CommandHistory.Add(CommandInput.text);
                             CommandRunner(CommandInput.text); // Execute command
@@ -189,7 +205,7 @@ namespace Non_Lethal_Dev_Console
             }
         }
 
-        private void DrawUI ()
+        private void DrawUI()
         {
             var canvas = new GameObject("Canvas").AddComponent<Canvas>();
             DevConsole = canvas;
