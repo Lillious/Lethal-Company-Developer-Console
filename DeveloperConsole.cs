@@ -21,7 +21,6 @@ namespace Non_Lethal_Dev_Console
         private Canvas DevConsole;
         static Library LC_Lib = new Library();
         PlayerControllerB Player;
-        Terminal Terminal;
         private bool isInGame = false;
         private bool initialized = false;
         private string result = "";
@@ -116,7 +115,6 @@ namespace Non_Lethal_Dev_Console
             if (!isInGame) return;
             initialized = true;
             Player = LC_Lib.GetPlayer("Player");
-            Terminal = LC_Lib.GetTerminal();
             GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
         }
 
