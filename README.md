@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
             _  _            _        _   _         _                 
            | \| |___ _ _   | |   ___| |_| |_  __ _| |                
@@ -26,3 +27,8 @@ Installation:
         2a) IF YOU DO NOT SEE THE USERLIBS, MODS, OR PLUGINS FOLDER - RUN THE GAME WITH MELONLOADER INSTALLED. THE FOLDERS WILL THEN BE CREATED
     3) Place the "Non-Lethal Dev Console.dll" in /Lethal Company/Mods in the game directory.
     4) Enjoy!
+=======
+# Non-Lethal Dev Console
+Dependencies
+- https://github.com/Lillious/Lethal-Company-Mod-Library
+>>>>>>> 498c6ad1ae9f0258d11835ce8e88644b0282eba4
