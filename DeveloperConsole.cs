@@ -85,7 +85,7 @@ namespace Non_Lethal_Dev_Console
                                 break;
                             }
 
-                            LC_Lib.SetPlayerSpeed(Player, int.Parse(args[2]));
+                            LC_Lib.SetPlayerSpeed(Player, float.Parse(args[2]));
                             result = $"Set Player's speed to {args[2]}";
                             break;
                         default:
@@ -93,6 +93,38 @@ namespace Non_Lethal_Dev_Console
                             break;
                     }
                     break;
+
+                case "get":
+                    // If the player only types the word get
+                    if(args.Length == 1)
+                    {
+                        result = "Error: Invalid arguments";
+                        break;
+                    }
+
+                    switch (args[1])
+                    {
+                        // If the player decides to get some value in relation to the player
+                        case "player":
+                            switch (args[2])
+                            {
+                                case "health":
+                                    result = $"Player's Health: {LC_Lib.GetPlayerHealth(Player)}";
+                                    break;
+                                case "speed":
+                                    result = $"Player's Speed: {LC_Lib.GetPlayerSpeed(Player)}";
+                                    break;
+                            }
+                            /*
+                             * This would be the section for when we implement things like "get door lockstatus" to return if a door is locked, get the weather = anything non player related
+                             */
+                            break;
+                        default:
+                            result = "Error: Invalid arguments";
+                            break;
+                    }
+                    break;
+
                 default:
                     result = "Error: Invalid command";
                     break;
