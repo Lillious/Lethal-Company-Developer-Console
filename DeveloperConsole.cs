@@ -44,7 +44,8 @@ namespace Non_Lethal_Dev_Console
                             "help - Displays this message\n" +
                             "clear - Clears the command history\n" +
                             "help set - Shows available commands for 'set'\n" +
-                            "help get - Shows available commands for 'get'";
+                            "help get - Shows available commands for 'get'\n" +
+                            "heal_player <player number> <value> - Heals player by <value>";
                         break;
                     }
                     switch (args[1])
@@ -57,7 +58,7 @@ namespace Non_Lethal_Dev_Console
                             "set <player number> jump <value> - Sets the player's jump force\n" +
                             "set <player number> climb_speed <value> - Sets the player's climb speed\n" +
                             "set <player number> drunkness <value> - Sets the player's drunkness\n" +
-                            "Type 'help set2' for next commands";    
+                            "Type 'help set2' for next commands";
                             break;
                         case "set2":
                             result = "Commands:\n" +
@@ -216,6 +217,31 @@ namespace Non_Lethal_Dev_Console
                                 break;
                         }
                     }
+                    break;
+
+                // heal_player <player> <value>
+                case "heal_player":
+                    {
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            result = "Error: Player not found";
+                            break;
+                        }
+                        else
+                        {
+                            MelonLogger.Msg("Player is not null, entered the else statement");
+                            MelonLogger.Msg($"Args[0]: {args[0]}");
+                            MelonLogger.Msg($"Args[1]: {args[1]}");
+                            MelonLogger.Msg($"Args[2]: {args[2]}");
+                            LC_Lib.HealPlayer(Player, int.Parse(args[2]));
+                            result = $"Player {args[1]} was healed by {args[2]} points";
+                            break;
+
+                        }
+                    }
+                default:
+                    result = "Error: Invalid Command";
                     break;
             }
 
