@@ -61,7 +61,7 @@ namespace Non_Lethal_Dev_Console
                     // If the player only types two words ex. 'set health'
                     if (args.Length < 3)
                     {
-                        result = "Error: Invalid arguments\n";
+                        result = "Error: Invalid arguments";
                         break;
                     }
 
@@ -71,31 +71,31 @@ namespace Non_Lethal_Dev_Console
                         case "health":
                             if (Player is null)
                             {
-                                result = "Error: Player is null\n";
+                                result = "Error: Player is null";
                                 break;
                             }
 
                             LC_Lib.SetPlayerHealth(Player, int.Parse(args[2]));
-                            result = $"Set Player's health to {args[2]}\n";
+                            result = $"Set Player's health to {args[2]}";
                             break;
                         // Set Current Player's Speed
                         case "speed":
                             if (Player is null)
                             {
-                                result = "Error: Player is null\n";
+                                result = "Error: Player is null";
                                 break;
                             }
 
                             LC_Lib.SetPlayerSpeed(Player, int.Parse(args[2]));
-                            result = $"Set Player's speed to {args[2]}\n";
+                            result = $"Set Player's speed to {args[2]}";
                             break;
                         default:
-                            result = "Error: Invalid arguments\n";
+                            result = "Error: Invalid arguments";
                             break;
                     }
                     break;
                 default:
-                    result = "Error: Invalid command\n";
+                    result = "Error: Invalid command";
                     break;
             }
 
