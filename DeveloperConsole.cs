@@ -204,7 +204,7 @@ namespace Non_Lethal_Dev_Console
             var Dev_Console_Background_Transform = Dev_Console_Background.AddComponent<RectTransform>();
             Dev_Console_Background.transform.localPosition = Vector3.zero;
             Dev_Console_Background.AddComponent<RawImage>();
-            Dev_Console_Background.GetComponent<RawImage>().color = new Color(0, 0, 0, 0.8f);
+            Dev_Console_Background.GetComponent<RawImage>().color = new Color(0, 0, 0, 0.9f);
             Dev_Console_Background_Transform.anchorMin = new Vector2(0.5f, 1);
             Dev_Console_Background_Transform.anchorMax = new Vector2(0.5f, 1);
             Dev_Console_Background_Transform.pivot = new Vector2(0.5f, 1);
@@ -218,7 +218,7 @@ namespace Non_Lethal_Dev_Console
             Dev_Console_InputField_Transform.anchorMax = new Vector2(0.5f, 0);
             Dev_Console_InputField_Transform.pivot = new Vector2(0.5f, 1);
             Dev_Console_InputField_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 13);
-            Dev_Console_InputField_Transform.localPosition = new Vector3(0, (Dev_Console_InputField_Transform.localPosition.y + 13), 0);
+            Dev_Console_InputField_Transform.localPosition = new Vector3(10, (Dev_Console_InputField_Transform.localPosition.y + 13), 0);
             Dev_Console_InputField.AddComponent<Image>().color = new Color(0, 0, 0, 0);
             CommandInput = Dev_Console_InputField.AddComponent<TMP_InputField>();
             var img = Dev_Console_InputField_Transform.GetComponent<Image>();
@@ -268,7 +268,7 @@ namespace Non_Lethal_Dev_Console
             Dev_Console_Text.transform.parent = Dev_Console_ViewPort.transform;
             Dev_Console_Text.transform.localPosition = Vector3.zero;
             var Dev_Console_Text_Transform = Dev_Console_Text.AddComponent<RectTransform>();
-            Dev_Console_Text_Transform.localPosition = new Vector3(0, Dev_Console_Text_Transform.localPosition.y + 13, 0);
+            Dev_Console_Text_Transform.localPosition = new Vector3(10, Dev_Console_Text_Transform.localPosition.y + 13, 0);
             Dev_Console_Text_Transform.anchorMin = new Vector2(0, 1);
             Dev_Console_Text_Transform.anchorMax = new Vector2(1, 1);
             Dev_Console_Text_Transform.pivot = new Vector2(0.5f, 1);
