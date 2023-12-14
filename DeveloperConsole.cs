@@ -20,11 +20,11 @@ namespace Non_Lethal_Dev_Console
         private List<string> CommandHistory = new List<string>();
         private Canvas DevConsole;
         static Library LC_Lib = new Library();
-        PlayerControllerB Player;
         private bool isInGame = false;
         private bool initialized = false;
         private string result = "";
         private TMP_FontAsset GameFont;
+        private PlayerControllerB CurrentPlayer;
 
         private void CommandRunner(string command)
         {
@@ -35,7 +35,7 @@ namespace Non_Lethal_Dev_Console
 
             switch (args[0])
             {
-                // Help Command
+                // help <command>
                 case "help":
                     if (args.Length == 1)
                     {
@@ -51,51 +51,53 @@ namespace Non_Lethal_Dev_Console
                             result = "Commands:\n" +
                             "set health <value> - Sets the player's healh\n" +
                             "set speed <value> - Sets the player's sprint speed\n";
-                            break;
-                    }
-                    break;
-
-                // Set command
-                case "set":
-                    // If the player only types two words ex. 'set health'
-                    if (args.Length < 3)
-                    {
-                        result = "Error: Invalid arguments";
                         break;
                     }
+                break;
 
-                    switch (args[1])
+                // set <player> <property> <value>
+                case "set":
                     {
-                        // Set Current Player's Health
-                        case "health":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
-                                break;
-                            }
-
-                            LC_Lib.SetPlayerHealth(Player, int.Parse(args[2]));
-                            result = $"Set Player's health to {args[2]}";
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            result = "Error: Player not found";
                             break;
-                        // Set Current Player's Speed
-                        case "speed":
-                            if (Player is null)
-                            {
-                                result = "Error: Player is null";
-                                break;
-                            }
-
-                            LC_Lib.SetPlayerSpeed(Player, int.Parse(args[2]));
-                            result = $"Set Player's speed to {args[2]}";
+                        }
+                        switch (args[2])
+                        {
+                            case "health":
+                                LC_Lib.SetPlayerHealth(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s health to {args[3]}";
                             break;
-                        default:
-                            result = "Error: Invalid arguments";
+                            case "speed":
+                                LC_Lib.SetPlayerSpeed(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s speed to {args[3]}";
                             break;
+                        }
                     }
-                    break;
-                default:
-                    result = "Error: Invalid command";
-                    break;
+                break;
+
+                // get <player> <property>
+               case "get":
+                    {
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            result = "Error: Player not found";
+                            break;
+                        }
+                        switch (args[2])
+                        {
+                            case "health":
+                                result = $"Player {args[1]}'s health is {LC_Lib.GetPlayerHealth(Player)}";
+                            break;
+                            case "speed":
+                                result = $"Player {args[1]}'s speed is {LC_Lib.GetPlayerSpeed(Player)}";
+                            break;
+                        }
+                    }
+               break;  
             }
 
             if (!string.IsNullOrEmpty(result))
@@ -113,9 +115,9 @@ namespace Non_Lethal_Dev_Console
         private void Initialize()
         {
             if (!isInGame) return;
-            initialized = true;
-            Player = LC_Lib.GetPlayer("Player");
+            CurrentPlayer = LC_Lib.SearchForControlledPlayer();
             GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
+            initialized = true;
         }
 
         public override void OnUpdate()
@@ -170,12 +172,13 @@ namespace Non_Lethal_Dev_Console
                         if (DevConsole.gameObject.activeInHierarchy)
                         {
                             DevConsole.gameObject.SetActive(false);
-                            Player.enabled = true;
+
+                            CurrentPlayer.enabled = true;
                         }
                         else
                         {
                             DevConsole.gameObject.SetActive(true);
-                            Player.enabled = false;
+                            CurrentPlayer.enabled = false;
                             CommandInput.Select();
                             CommandInput.ActivateInputField();
                         }
