@@ -63,6 +63,16 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetPlayerHealth(Player, int.Parse(args[2]));
                             result = $"Set Player's health to {args[2]}";
                             break;
+                        case "speed":
+                            if (Player is null)
+                            {
+                                result = "Error: Player is null";
+                                break;
+                            }
+
+                            LC_Lib.SetPlayerSpeed(Player, int.Parse(args[2]));
+                            result = $"Set Player's speed to {args[2]}";
+                            break;  
                         default:
                             result = "Error: Invalid arguments";
                             break;
