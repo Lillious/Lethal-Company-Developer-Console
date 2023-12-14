@@ -64,7 +64,13 @@ namespace Non_Lethal_Dev_Console
                                 "set <player number> grab_distance <value> - Sets the player's grab distance\n" +
                                 "set <player number> exhaust <true/false> - Sets if the player is exhausted\n" +
                                 "set <player number> max_insanity <value> - Sets the player's max insanity\n" +
-                                "set <player number> min_velocity_to_take_damage <value> - Sets the players' minimum velocity to take damage";
+                                "set <player number> min_velocity_to_take_damage <value> - Sets the players' minimum velocity to take damage\n" +
+                                "set <player number> level <value> - Sets the player's level\n" +
+                                "Type 'set3' for next commands";
+                            break;
+                        case "set3":
+                            result = "Commands:\n" +
+                                "";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -81,7 +87,13 @@ namespace Non_Lethal_Dev_Console
                                 "get <player number> grab_distance - Returns the player's grab distance\n" +
                                 "get <player number> exhaust - Returns if the player is exhausted\n" +
                                 "get <player number> max_insanity - Returns the player's max insanity\n" +
-                                "get <player number> min_velocity_to_take_damage - Returns the player's minimum velocity to take damage";
+                                "get <player number> min_velocity_to_take_damage - Returns the player's minimum velocity to take damage\n" +
+                                "get <player number> level - Returns the player's level\n" +
+                                "Type 'get3' for next commands";
+                            break;
+                        case "get3":
+                            result = "Commands:\n" +
+                                "";
                             break;
                     }
                     break;
@@ -142,6 +154,11 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Minimum Velocity To Take Damage to {args[3]}";
                                 break;
+                            // Sets the Player's Level
+                            case "level":
+                                LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Level to {args[3]}";
+                                break;
                         }
                     }
                     break;
@@ -192,6 +209,10 @@ namespace Non_Lethal_Dev_Console
                             // Returns the player's minimum velocity to take damage
                             case "min_velocity_to_take_damage":
                                 result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
+                                break;
+                            // Returns the player's level
+                            case "level":
+                                result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
                                 break;
                         }
                     }
