@@ -26,7 +26,7 @@ namespace Non_Lethal_Dev_Console
         private string result = "";
         private TMP_FontAsset GameFont;
 
-        private void CommandRunner (string command)
+        private void CommandRunner(string command)
         {
             if (string.IsNullOrEmpty(command)) return;
             command = command.ToLower();
@@ -40,13 +40,23 @@ namespace Non_Lethal_Dev_Console
                     result = "Commands:\n" +
                         "help - Displays this message\n" +
                         "clear - Clears the command history\n" +
-                        "set - Sets a value\n" +
-                        "set health <value> - Sets the player's health\n";
+                        "set - Shows the commands available for set\n";
                     break;
+
+                // Set command
                 case "set":
-                    if (args.Length < 3)
+                    // If the player types 'set' to show commands
+                    if (args.Length == 1)
                     {
-                        result = "Error: Invalid arguments";
+                        result = "Commands:\n" +
+                            "set health <value> - Sets the player's healh\n" +
+                            "set sprint <value> - Sets the player's sprint speed\n";
+                        break;
+                    }
+                    // If the player only types two words ex. 'set health'
+                    if (args.Length > 1 && args.Length != 3)
+                    {
+                        result = "Error: Invalid arguments\n";
                         break;
                     }
 
@@ -56,30 +66,31 @@ namespace Non_Lethal_Dev_Console
                         case "health":
                             if (Player is null)
                             {
-                                result = "Error: Player is null";
+                                result = "Error: Player is null\n";
                                 break;
                             }
 
                             LC_Lib.SetPlayerHealth(Player, int.Parse(args[2]));
-                            result = $"Set Player's health to {args[2]}";
+                            result = $"Set Player's health to {args[2]}\n";
                             break;
+                        // Set Current Player's Speed
                         case "speed":
                             if (Player is null)
                             {
-                                result = "Error: Player is null";
+                                result = "Error: Player is null\n";
                                 break;
                             }
 
                             LC_Lib.SetPlayerSpeed(Player, int.Parse(args[2]));
-                            result = $"Set Player's speed to {args[2]}";
-                            break;  
+                            result = $"Set Player's speed to {args[2]}\n";
+                            break;
                         default:
-                            result = "Error: Invalid arguments";
+                            result = "Error: Invalid arguments\n";
                             break;
                     }
-                break;
+                    break;
                 default:
-                    result = "Error: Invalid command";
+                    result = "Error: Invalid command\n";
                     break;
             }
 
@@ -130,7 +141,8 @@ namespace Non_Lethal_Dev_Console
                         {
                             CommandHistory.Clear();
                             CommandOutput.text = "";
-                        } else
+                        }
+                        else
                         {
                             CommandHistory.Add(CommandInput.text);
                             CommandRunner(CommandInput.text); // Execute command
@@ -189,7 +201,7 @@ namespace Non_Lethal_Dev_Console
             }
         }
 
-        private void DrawUI ()
+        private void DrawUI()
         {
             var canvas = new GameObject("Canvas").AddComponent<Canvas>();
             DevConsole = canvas;
