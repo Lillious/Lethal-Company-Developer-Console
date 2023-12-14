@@ -63,7 +63,8 @@ namespace Non_Lethal_Dev_Console
                             result = "Commands:\n" +
                                 "set <player number> grab_distance <value> - Sets the player's grab distance\n" +
                                 "set <player number> exhaust <true/false> - Sets if the player is exhausted\n" +
-                                "set <player number> max_insanity <value> - Sets the player's max insanity";
+                                "set <player number> max_insanity <value> - Sets the player's max insanity\n" +
+                                "set <player number> min_velocity_to_take_damage <value> - Sets the players' minimum velocity to take damage";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -79,7 +80,8 @@ namespace Non_Lethal_Dev_Console
                             result = "Commands:\n" +
                                 "get <player number> grab_distance - Returns the player's grab distance\n" +
                                 "get <player number> exhaust - Returns if the player is exhausted\n" +
-                                "get <player number> max_insanity - Returns the player's max insanity";
+                                "get <player number> max_insanity - Returns the player's max insanity\n" +
+                                "get <player number> min_velocity_to_take_damage - Returns the player's minimum velocity to take damage";
                             break;
                     }
                     break;
@@ -135,6 +137,11 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
                                 break;
+                            // Sets the Player's Minimum Velocity To Take Damage
+                            case "min_velocity_to_take_damage":
+                                LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Minimum Velocity To Take Damage to {args[3]}";
+                                break;
                         }
                     }
                     break;
@@ -181,6 +188,10 @@ namespace Non_Lethal_Dev_Console
                             // Returns the player's max insanity
                             case "max_insanity":
                                 result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
+                                break;
+                            // Returns the player's minimum velocity to take damage
+                            case "min_velocity_to_take_damage":
+                                result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
                                 break;
                         }
                     }
