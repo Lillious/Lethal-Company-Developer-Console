@@ -24,6 +24,6 @@ we are able to create something that will become essential within the modding co
 ## Installation
 1. Please ensure that the appropriate dependencies have been downloaded and installed (Refer to the beginning of the README for links).
 2. Place the "Lethal_Library.dll" in the /Lethal Company/UserLibs folder in the game directory.
-2.1. IF YOU DO NOT SEE THE USERLIBS, MODS, OR PLUGINS FOLDER - RUN THE GAME WITH MELONLOADER INSTALLED. THE FOLDERS WILL THEN BE CREATED
+   - IF YOU DO NOT SEE THE USERLIBS, MODS, OR PLUGINS FOLDER - RUN THE GAME WITH MELONLOADER INSTALLED. THE FOLDERS WILL THEN BE CREATED
 3. Place the "Non-Lethal Dev Console.dll" in /Lethal Company/Mods in the game directory.
 4. Enjoy!
