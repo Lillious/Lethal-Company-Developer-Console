@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-[assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "1.0.0", "Lillious, .Zer0")]
+[assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "0.0.1", "Lillious, .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 namespace Non_Lethal_Dev_Console
 {
@@ -56,12 +56,20 @@ namespace Non_Lethal_Dev_Console
                             "set <player number> jump <value> - Sets the player's jump force\n" +
                             "set <player number> climb_speed <value> - Sets the player's climb speed\n" +
                             "set <player number> drunkness <value> - Sets the player's drunkness\n" +
-                            "Type 'help set2' for next commands";    
+                            "Type 'help set2' for next commands";
                             break;
                         case "set2":
                             result = "Commands:\n" +
                                 "set <player number> grab_distance <value> - Sets the player's grab distance\n" +
-                                "set <player number> exhaust - Sets if the player is exhausted";
+                                "set <player number> exhaust <true/false> - Sets if the player is exhausted\n" +
+                                "set <player number> max_insanity <value> - Sets the player's max insanity\n" +
+                                "set <player number> min_velocity_to_take_damage <value> - Sets the players' minimum velocity to take damage\n" +
+                                "set <player number> level <value> - Sets the player's level\n" +
+                                "Type 'set3' for next commands";
+                            break;
+                        case "set3":
+                            result = "Commands:\n" +
+                                "";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -76,7 +84,15 @@ namespace Non_Lethal_Dev_Console
                         case "get2":
                             result = "Commands:\n" +
                                 "get <player number> grab_distance - Returns the player's grab distance\n" +
-                                "get <player number> exhaust - Returns if the player is exhausted";
+                                "get <player number> exhaust - Returns if the player is exhausted\n" +
+                                "get <player number> max_insanity - Returns the player's max insanity\n" +
+                                "get <player number> min_velocity_to_take_damage - Returns the player's minimum velocity to take damage\n" +
+                                "get <player number> level - Returns the player's level\n" +
+                                "Type 'get3' for next commands";
+                            break;
+                        case "get3":
+                            result = "Commands:\n" +
+                                "";
                             break;
                     }
                     break;
@@ -127,6 +143,21 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetExhaustion(Player, bool.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
                                 break;
+                            // Sets the Player's Max Insanity
+                            case "max_insanity":
+                                LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
+                                break;
+                            // Sets the Player's Minimum Velocity To Take Damage
+                            case "min_velocity_to_take_damage":
+                                LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Minimum Velocity To Take Damage to {args[3]}";
+                                break;
+                            // Sets the Player's Level
+                            case "level":
+                                LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Level to {args[3]}";
+                                break;
                         }
                     }
                     break;
@@ -170,8 +201,23 @@ namespace Non_Lethal_Dev_Console
                             case "exhaust":
                                 result = $"Player {args[1]}'s Exhaustion: {LC_Lib.GetExhaustion(Player)}";
                                 break;
+                            // Returns the player's max insanity
+                            case "max_insanity":
+                                result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
+                                break;
+                            // Returns the player's minimum velocity to take damage
+                            case "min_velocity_to_take_damage":
+                                result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
+                                break;
+                            // Returns the player's level
+                            case "level":
+                                result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
+                                break;
                         }
                     }
+                    break;
+                default:
+                    result = "Error: Invalid Command";
                     break;
             }
 
