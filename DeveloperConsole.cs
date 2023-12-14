@@ -2,7 +2,6 @@
 using Lethal_Library;
 using MelonLoader;
 using Non_Lethal_Dev_Console;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,17 +36,26 @@ namespace Non_Lethal_Dev_Console
             {
                 // help <command>
                 case "help":
+                    // Displays the first help screen
                     if (args.Length == 1)
                     {
                         result = "Commands:\n" +
                             "help - Displays this message\n" +
                             "clear - Clears the command history\n" +
                             "help set - Shows available commands for 'set'\n" +
-                            "help get - Shows available commands for 'get'";
+                            "help get - Shows available commands for 'get'\n" + 
+                            "drop_all_held_items <player number> - Drops all held items\n" +
+                            "Type 'help 2' to see next commands";
                         break;
                     }
                     switch (args[1])
                     {
+                        // Help section for 'help'
+                        // Displays the second page of 'help'
+                        case "2":
+                            result = "Commands:\n" +
+                            "This is the second page of help";
+                            break;
                         // Help section for 'set'
                         case "set":
                             result = "Commands:\n" +
@@ -69,7 +77,7 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "set3":
                             result = "Commands:\n" +
-                                "";
+                                "set <player number> look_sensitivity <value> - Sets the player's look sensitivity";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -92,7 +100,7 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "get3":
                             result = "Commands:\n" +
-                                "";
+                                "get <player number> look_sensitivity - Returns the player's look sensitivity";
                             break;
                     }
                     break;
@@ -104,6 +112,11 @@ namespace Non_Lethal_Dev_Console
                         if (Player is null)
                         {
                             result = "Error: Player not found";
+                            break;
+                        }
+                        if (args.Length == 2)
+                        {
+                            result = "Error: Invalid arguments - Please specify what to set";
                             break;
                         }
                         switch (args[2])
@@ -158,6 +171,14 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Level to {args[3]}";
                                 break;
+                            // Sets the Player's Look Sensitivity
+                            case "look_sensitivity":
+                                LC_Lib.SetLookSensitivity(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Look Sensitivity to {args[3]}";
+                                break;
+                            default:
+                                result = "Error: Invalid arguments";
+                                break;
                         }
                     }
                     break;
@@ -169,6 +190,11 @@ namespace Non_Lethal_Dev_Console
                         if (Player is null)
                         {
                             result = "Error: Player not found";
+                            break;
+                        }
+                        if(args.Length == 2)
+                        {
+                            result = "Error: Invalid Arguments - Please specify what to get";
                             break;
                         }
                         switch (args[2])
@@ -213,9 +239,30 @@ namespace Non_Lethal_Dev_Console
                             case "level":
                                 result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
                                 break;
+                            // Returns the player's look sensitivity
+                            case "look_sensitivity":
+                                result = $"Player {args[1]}'s Look Sensitivity: {LC_Lib.GetLookSensitivity(Player)}";
+                                break;
+                            default:
+                                result = "Error: Invalid arguments";
+                                break;
                         }
                     }
                     break;
+
+                // drop_all_items <player>
+                case "drop_all_held_items":
+                    {
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if(Player is null)
+                        {
+                            result = "Error: Player not found";
+                            break;
+                        }
+                        LC_Lib.DropAllHeldItems(Player);
+                        result = $"Dropped all held items in Player {args[1]} hand";
+                        break;
+                    }
                 default:
                     result = "Error: Invalid Command";
                     break;
