@@ -106,7 +106,8 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "terminal":
                             result = "Commands:\n" +
-                                "get_credits - Returns the credits available to spend";
+                                "get_credits - Returns the credits available to spend\n" +
+                                "set_credits <value> - Sets the credits available to spend";
                             break;
                     }
                     break;
@@ -279,13 +280,23 @@ namespace Non_Lethal_Dev_Console
                         result = "Error: Terminal not found (This has most likely happened because code was edited.)";
                         break;
                     }
+                    // If they only type the word "terminal"
+                    if(args.Length == 1)
+                    {
+                        result = "Error: Invalid Arguments - Please specify what to do with the terminal";
+                        break;
+                    }
                     switch (args[1])
                     {
-                        // What the player is requesting to do to the terminal
+                        // Returns the credits available
                         case "get_credits":
                             result = $"Credits: {LC_Lib.GetGroupCredits(Terminal)}";
                             break;
-
+                        // Sets the credits available
+                        case "set_credits":
+                            LC_Lib.SetGroupCredits(Terminal, int.Parse(args[2]));
+                            result = $"Set Group Credits to {args[2]}";
+                            break;
                     }
                     break;
                     
