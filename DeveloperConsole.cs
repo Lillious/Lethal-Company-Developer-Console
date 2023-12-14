@@ -7,8 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
-[assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "1.0.0", "Lillious, .Zer0")]
+[assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "0.0.1", "Lillious, .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 namespace Non_Lethal_Dev_Console
 {
@@ -61,7 +62,8 @@ namespace Non_Lethal_Dev_Console
                         case "set2":
                             result = "Commands:\n" +
                                 "set <player number> grab_distance <value> - Sets the player's grab distance\n" +
-                                "set <player number> exhaust - Sets if the player is exhausted";
+                                "set <player number> exhaust <true/false> - Sets if the player is exhausted\n" +
+                                "set <player number> max_insanity <value> - Sets the player's max insanity";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -76,7 +78,8 @@ namespace Non_Lethal_Dev_Console
                         case "get2":
                             result = "Commands:\n" +
                                 "get <player number> grab_distance - Returns the player's grab distance\n" +
-                                "get <player number> exhaust - Returns if the player is exhausted";
+                                "get <player number> exhaust - Returns if the player is exhausted\n" +
+                                "get <player number> max_insanity - Returns the player's max insanity";
                             break;
                     }
                     break;
@@ -127,6 +130,11 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetExhaustion(Player, bool.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
                                 break;
+                            // Sets the Player's Max Insanity
+                            case "max_insanity":
+                                LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
+                                break;
                         }
                     }
                     break;
@@ -169,6 +177,10 @@ namespace Non_Lethal_Dev_Console
                             // Returns the player's exhaustion
                             case "exhaust":
                                 result = $"Player {args[1]}'s Exhaustion: {LC_Lib.GetExhaustion(Player)}";
+                                break;
+                            // Returns the player's max insanity
+                            case "max_insanity":
+                                result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
                                 break;
                         }
                     }
