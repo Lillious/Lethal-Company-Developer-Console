@@ -14,13 +14,12 @@ namespace Non_Lethal_Dev_Console
 {
     public class DeveloperConsole : MelonMod
     {
+        private Library LC_Lib = new Library();
         [SerializeField] private Sprite sprite;
         private TMP_InputField CommandInput;
         private TextMeshProUGUI CommandOutput;
         private List<string> CommandHistory = new List<string>();
         private Canvas DevConsole;
-        static Library LC_Lib = new Library();
-        private bool isInGame = false;
         private bool initialized = false;
         private string result = "";
         private TMP_FontAsset GameFont;
@@ -317,7 +316,7 @@ namespace Non_Lethal_Dev_Console
             }
         }
 
-        private void Initialize()
+        public override void OnUpdate()
         {
             if (!isInGame) return;
             CurrentPlayer = LC_Lib.SearchForControlledPlayer();
@@ -326,9 +325,7 @@ namespace Non_Lethal_Dev_Console
             initialized = true;
         }
 
-        public override void OnUpdate()
-        {
-            if (initialized && isInGame)
+            if (initialized && LC_Lib.IsInGame())
             {
                 // Initialize Dev Console and hide it
                 // Check if dev console exists
@@ -394,23 +391,6 @@ namespace Non_Lethal_Dev_Console
                 {
                     MelonLogger.Msg("Error: Failed to toggle Dev Console");
                 }
-            }
-        }
-
-        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-        {
-            if (sceneName == "SampleSceneRelay")
-            {
-                isInGame = true;
-                Initialize();
-            }
-        }
-
-        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
-        {
-            if (sceneName == "SampleSceneRelay")
-            {
-                isInGame = false;
             }
         }
 
