@@ -73,7 +73,8 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "set3":
                             result = "Commands:\n" +
-                                "set <player number> position <x, y, z> - Sets the player's position. Use ' - ' for current position.";
+                                "set <player number> position <x, y, z> - Sets the player's position. Use ' - ' for current position.\n" +
+                                "set <player number> drunk_inertia <value> - Sets the player's drunk inertia";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -97,13 +98,13 @@ namespace Non_Lethal_Dev_Console
                         case "get3":
                             result = "Commands:\n" +
                                 "get <player number> position - Returns the player's position in X,Y,Z coordinates\n" +
-                                "get <player number> is_drunk - Returns if the player is drunk";
+                                "get <player number> is_drunk - Returns if the player is drunk\n" +
+                                "get <player number> drunk_inertia - Returns the player's drunkness inertia";
                             break;
                     }
                     break;
 
                 // PLAYER COMMANDS
-
                 // set <player> <property> <value>
                 case "set":
                     {
@@ -139,6 +140,11 @@ namespace Non_Lethal_Dev_Console
                             case "drunkness":
                                 LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s drunkness to {args[3]}";
+                                break;
+                            // Sets the Player's drunk inertia
+                            case "drunk_inertia":
+                                LC_Lib.SetDrunknessInertia(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s drunk_inertia to {args[3]}";
                                 break;
                             // Sets the Player's Grab Distance
                             case "grab_distance":
@@ -252,6 +258,10 @@ namespace Non_Lethal_Dev_Console
                                     result = $"Player {args[1]} is not drunk";
                                     break;
                                 }
+                            // Returns the player's drunkness inertia
+                            case "drunk_inertia":
+                                result = $"Player {args[1]}'s Drunk Inertia: {LC_Lib.GetDrunknessInertia(Player)}";
+                                break;
                             // Returns the player's grab distance
                             case "grab_distance":
                                 result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
