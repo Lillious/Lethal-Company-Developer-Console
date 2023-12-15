@@ -325,13 +325,15 @@ namespace Non_Lethal_Dev_Console
 
         public override void OnUpdate()
         {
-            if (initialized && LC_Lib.IsInGame())
+
+            if (!initialized && LC_Lib.IsInGame())
             {
                 if (!LC_Lib.IsInGame()) return;
                 CurrentPlayer = LC_Lib.SearchForControlledPlayer();
-                Terminal = LC_Lib.GetTerminal();
                 GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
+                Terminal = LC_Lib.GetTerminal();
                 initialized = true;
+                return;
             }
 
             if (initialized && LC_Lib.IsInGame())
@@ -375,7 +377,6 @@ namespace Non_Lethal_Dev_Console
                 {
                     MelonLogger.Msg("Error: Failed to open dev console");
                 }
-
 
                 try
                 {
