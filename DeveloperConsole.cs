@@ -143,7 +143,7 @@ namespace Non_Lethal_Dev_Console
                                 break;
                             // Sets the Player's Exhaustion
                             case "exhaust":
-                                LC_Lib.SetExhaustion(Player, bool.Parse(args[3]));
+                                LC_Lib.SetExhausted(Player, bool.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
                                 break;
                             // Sets the Player's Max Insanity
@@ -241,7 +241,7 @@ namespace Non_Lethal_Dev_Console
                                 break;
                             // Returns the player's exhaustion
                             case "exhaust":
-                                result = $"Player {args[1]}'s Exhaustion: {LC_Lib.GetExhaustion(Player)}";
+                                result = $"Player {args[1]}'s Exhaustion: {LC_Lib.IsExhausted(Player)}";
                                 break;
                             // Returns the player's max insanity
                             case "max_insanity":
