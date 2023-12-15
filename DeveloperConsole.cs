@@ -40,6 +40,7 @@ namespace Non_Lethal_Dev_Console
                     break;
                 // help <command>
                 case "help":
+                    // Displays the first help screen
                     if (args.Length == 1)
                     {
                         result = "Commands:\n" +
@@ -68,7 +69,7 @@ namespace Non_Lethal_Dev_Console
                                 "set <player number> max_insanity <value> - Sets the player's max insanity\n" +
                                 "set <player number> min_velocity_to_take_damage <value> - Sets the players' minimum velocity to take damage\n" +
                                 "set <player number> level <value> - Sets the player's level\n" +
-                                "Type 'set3' for next commands";
+                                "Type 'help set3' for next commands";
                             break;
                         case "set3":
                             result = "Commands:\n" +
@@ -91,14 +92,17 @@ namespace Non_Lethal_Dev_Console
                                 "get <player number> max_insanity - Returns the player's max insanity\n" +
                                 "get <player number> min_velocity_to_take_damage - Returns the player's minimum velocity to take damage\n" +
                                 "get <player number> level - Returns the player's level\n" +
-                                "Type 'get3' for next commands";
+                                "Type 'help get3' for next commands";
                             break;
                         case "get3":
                             result = "Commands:\n" +
-                                "get <player number> position";
+                                "get <player number> position - Returns the player's position in X,Y,Z coordinates\n" +
+                                "get <player number> is_drunk - Returns if the player is drunk";
                             break;
                     }
                     break;
+
+                // PLAYER COMMANDS
 
                 // set <player> <property> <value>
                 case "set":
@@ -213,6 +217,7 @@ namespace Non_Lethal_Dev_Console
                             result = "Error: Player not found";
                             break;
                         }
+                        
                         switch (args[2])
                         {
                             // Returns the player's health
@@ -235,6 +240,18 @@ namespace Non_Lethal_Dev_Console
                             case "drunkness":
                                 result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
                                 break;
+                            // Returns if the player is drunk
+                            case "is_drunk":
+                                if (LC_Lib.IsDrunk(Player))
+                                {
+                                    result = $"Player {args[1]} is drunk";
+                                    break;
+                                }
+                                else
+                                {
+                                    result = $"Player {args[1]} is not drunk";
+                                    break;
+                                }
                             // Returns the player's grab distance
                             case "grab_distance":
                                 result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
@@ -263,6 +280,7 @@ namespace Non_Lethal_Dev_Console
                         }
                     }
                     break;
+
                 default:
                     result = "Error: Invalid Command";
                     break;
