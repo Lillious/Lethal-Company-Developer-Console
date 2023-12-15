@@ -34,6 +34,10 @@ namespace Non_Lethal_Dev_Console
 
             switch (args[0])
             {
+                // Utilities
+                case "exit":
+                    Application.Quit();
+                    break;
                 // help <command>
                 case "help":
                     // Displays the first help screen
@@ -71,11 +75,11 @@ namespace Non_Lethal_Dev_Console
                                 "set <player number> max_insanity <value> - Sets the player's max insanity\n" +
                                 "set <player number> min_velocity_to_take_damage <value> - Sets the players' minimum velocity to take damage\n" +
                                 "set <player number> level <value> - Sets the player's level\n" +
-                                "Type 'set3' for next commands";
+                                "Type 'help set3' for next commands";
                             break;
                         case "set3":
                             result = "Commands:\n" +
-                                "set <player number> look_sensitivity <value> - Sets the player's look sensitivity";
+                                "set <player number> position <x, y, z> - Sets the player's position. Use ' - ' for current position.";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -94,11 +98,11 @@ namespace Non_Lethal_Dev_Console
                                 "get <player number> max_insanity - Returns the player's max insanity\n" +
                                 "get <player number> min_velocity_to_take_damage - Returns the player's minimum velocity to take damage\n" +
                                 "get <player number> level - Returns the player's level\n" +
-                                "Type 'get3' for next commands";
+                                "Type 'help get3' for next commands";
                             break;
                         case "get3":
                             result = "Commands:\n" +
-                                "get <player number> look_sensitivity - Returns the player's look sensitivity";
+                                "get <player number> position";
                             break;
                     }
                     break;
@@ -171,13 +175,44 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Level to {args[3]}";
                                 break;
-                            // Sets the Player's Look Sensitivity
-                            case "look_sensitivity":
-                                LC_Lib.SetLookSensitivity(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Look Sensitivity to {args[3]}";
-                                break;
-                            default:
-                                result = "Error: Invalid arguments";
+                            // Set player's position
+                            case "position":
+                                if (args.Length != 6)
+                                {
+                                    result = "Error: Invalid Arguments";
+                                    break;
+                                }
+                                Vector3 CurrentPosition = LC_Lib.GetServerPosition(Player);
+                                float x, y, z;
+                                // - means x y or z position value
+                                // X position
+                                if (args[3] == "-")
+                                {
+                                    x = CurrentPosition.x;
+                                } else
+                                {
+                                    x = float.Parse(args[3]);
+                                }
+                                // Y position
+                                if (args[4] == "-")
+                                {
+                                    y = CurrentPosition.y;
+                                } else
+                                {
+                                    y = float.Parse(args[4]);
+                                }
+                                // Z position
+                                if (args[5] == "-")
+                                {
+                                    z = CurrentPosition.z;
+                                } else
+                                {
+                                    z = float.Parse(args[5]);
+                                }
+
+                                LC_Lib.TeleportPlayer(Player, new Vector3(x, y, z));
+                                result = $"Set Player {args[1]}'s Position to {x}, {y}, {z}\n" +
+                                    $"Player {args[1]}'s new position is {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
                                 break;
                         }
                     }
@@ -235,12 +270,10 @@ namespace Non_Lethal_Dev_Console
                             case "level":
                                 result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
                                 break;
-                            // Returns the player's look sensitivity
-                            case "look_sensitivity":
-                                result = $"Player {args[1]}'s Look Sensitivity: {LC_Lib.GetLookSensitivity(Player)}";
-                                break;
-                            default:
-                                result = "Error: Invalid arguments";
+                            // Returns the player's position
+                            case "position":
+                                Vector3 CurrentPosition = LC_Lib.GetServerPosition(Player);
+                                result = $"Player {args[1]}'s Position: {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
                                 break;
                         }
                     }
