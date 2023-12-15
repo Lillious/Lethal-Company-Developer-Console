@@ -91,7 +91,7 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "get3":
                             result = "Commands:\n" +
-                                "";
+                                "get <player number> position";
                             break;
                     }
                     break;
@@ -250,6 +250,11 @@ namespace Non_Lethal_Dev_Console
                             // Returns the player's level
                             case "level":
                                 result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
+                                break;
+                            // Returns the player's position
+                            case "position":
+                                Vector3 CurrentPosition = LC_Lib.GetServerPosition(Player);
+                                result = $"Player {args[1]}'s Position: {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
                                 break;
                         }
                     }
