@@ -73,7 +73,8 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "set3":
                             result = "Commands:\n" +
-                                "set <player number> position <x, y, z> - Sets the player's position. Use ' - ' for current position.";
+                                "set <player number> position <x, y, z> - Sets the player's position. Use ' - ' for current position.\n" +
+                                "set <player number> drunk_inertia <value> - Sets the player's drunk inertia";
                             break;
                         // Help section for 'get'
                         case "get":
@@ -140,6 +141,11 @@ namespace Non_Lethal_Dev_Console
                             case "drunkness":
                                 LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s drunkness to {args[3]}";
+                                break;
+                            // Sets the Player's drunk inertia
+                            case "drunk_inertia":
+                                LC_Lib.SetDrunknessInertia(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s drunk_inertia to {args[3]}";
                                 break;
                             // Sets the Player's Grab Distance
                             case "grab_distance":
