@@ -68,7 +68,7 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "set3":
                             result = "Commands:\n" +
-                                "";
+                                "set <player number> position <x, y, z> - Sets the player's position. Use ' - ' for current position.";
                             break;
                         // Help section for 'get'
                         case "get":
