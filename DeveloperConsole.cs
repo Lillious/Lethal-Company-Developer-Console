@@ -105,7 +105,6 @@ namespace Non_Lethal_Dev_Console
                     break;
 
                 // PLAYER COMMANDS
-
                 // set <player> <property> <value>
                 case "set":
                     {
