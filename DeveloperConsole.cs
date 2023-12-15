@@ -34,6 +34,10 @@ namespace Non_Lethal_Dev_Console
 
             switch (args[0])
             {
+                // Utilities
+                case "exit":
+                    Application.Quit();
+                    break;
                 // help <command>
                 case "help":
                     if (args.Length == 1)
