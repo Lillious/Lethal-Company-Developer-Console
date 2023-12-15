@@ -97,7 +97,8 @@ namespace Non_Lethal_Dev_Console
                         case "get3":
                             result = "Commands:\n" +
                                 "get <player number> position - Returns the player's position in X,Y,Z coordinates\n" +
-                                "get <player number> is_drunk - Returns if the player is drunk";
+                                "get <player number> is_drunk - Returns if the player is drunk\n" +
+                                "get <player number> drunk_inertia - Returns the player's drunkness inertia";
                             break;
                     }
                     break;
@@ -252,6 +253,10 @@ namespace Non_Lethal_Dev_Console
                                     result = $"Player {args[1]} is not drunk";
                                     break;
                                 }
+                            // Returns the player's drunkness inertia
+                            case "drunk_inertia":
+                                result = $"Player {args[1]}'s Drunk Inertia: {LC_Lib.GetDrunknessInertia(Player)}";
+                                break;
                             // Returns the player's grab distance
                             case "grab_distance":
                                 result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
