@@ -182,7 +182,7 @@ namespace Non_Lethal_Dev_Console
                                     result = "Error: Invalid Arguments";
                                     break;
                                 }
-                                Vector3 CurrentPosition = LC_Lib.GetServerPosition(Player);
+                                Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
                                 float x, y, z;
                                 // - means x y or z position value
                                 // X position
@@ -272,7 +272,7 @@ namespace Non_Lethal_Dev_Console
                                 break;
                             // Returns the player's position
                             case "position":
-                                Vector3 CurrentPosition = LC_Lib.GetServerPosition(Player);
+                                Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
                                 result = $"Player {args[1]}'s Position: {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
                                 break;
                         }
