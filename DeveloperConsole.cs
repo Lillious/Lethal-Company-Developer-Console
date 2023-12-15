@@ -44,7 +44,7 @@ namespace Non_Lethal_Dev_Console
                             "help - Displays this message\n" +
                             "clear - Clears the command history\n" +
                             "help set - Shows available commands for 'set'\n" +
-                            "help get - Shows available commands for 'get'\n" + 
+                            "help get - Shows available commands for 'get'\n" +
                             "help terminal - Shows available commands for the terminal\n" +
                             "Type 'help 2' to see next commands";
                         break;
@@ -200,7 +200,7 @@ namespace Non_Lethal_Dev_Console
                             result = "Error: Player not found";
                             break;
                         }
-                        if(args.Length == 2)
+                        if (args.Length == 2)
                         {
                             result = "Error: Invalid Arguments - Please specify what to get";
                             break;
@@ -262,7 +262,7 @@ namespace Non_Lethal_Dev_Console
                 case "drop_all_held_items":
                     {
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
-                        if(Player is null)
+                        if (Player is null)
                         {
                             result = "Error: Player not found";
                             break;
@@ -274,13 +274,13 @@ namespace Non_Lethal_Dev_Console
 
                 // TERMINAL COMMANDS
                 case "terminal":
-                    if(Terminal is null)
+                    if (Terminal is null)
                     {
                         result = "Error: Terminal not found (This has most likely happened because code was edited.)";
                         break;
                     }
                     // If they only type the word "terminal"
-                    if(args.Length == 1)
+                    if (args.Length == 1)
                     {
                         result = "Error: Invalid Arguments - Please specify what to do with the terminal";
                         break;
@@ -298,7 +298,14 @@ namespace Non_Lethal_Dev_Console
                             break;
                     }
                     break;
-                    
+
+                // QUOTA SETTINGS
+                case "quota":
+                    {
+
+                    }
+                    break;
+
                 default:
                     result = "Error: Invalid Command";
                     break;
@@ -318,12 +325,14 @@ namespace Non_Lethal_Dev_Console
 
         public override void OnUpdate()
         {
-            if (!isInGame) return;
-            CurrentPlayer = LC_Lib.SearchForControlledPlayer();
-            Terminal = LC_Lib.GetTerminal();
-            GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
-            initialized = true;
-        }
+            if (initialized && LC_Lib.IsInGame())
+            {
+                if (!LC_Lib.IsInGame()) return;
+                CurrentPlayer = LC_Lib.SearchForControlledPlayer();
+                Terminal = LC_Lib.GetTerminal();
+                GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
+                initialized = true;
+            }
 
             if (initialized && LC_Lib.IsInGame())
             {
@@ -366,6 +375,7 @@ namespace Non_Lethal_Dev_Console
                 {
                     MelonLogger.Msg("Error: Failed to open dev console");
                 }
+
 
                 try
                 {
