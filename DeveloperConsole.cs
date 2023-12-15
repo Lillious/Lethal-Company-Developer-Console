@@ -52,12 +52,6 @@ namespace Non_Lethal_Dev_Console
                     }
                     switch (args[1])
                     {
-                        // Help section for 'help'
-                        // Displays the second page of 'help'
-                        case "2":
-                            result = "Commands:\n" +
-                            "";
-                            break;
                         // Help section for 'set'
                         case "set":
                             result = "Commands:\n" +
@@ -117,11 +111,6 @@ namespace Non_Lethal_Dev_Console
                         if (Player is null)
                         {
                             result = "Error: Player not found";
-                            break;
-                        }
-                        if (args.Length == 2)
-                        {
-                            result = "Error: Invalid arguments - Please specify what to set";
                             break;
                         }
                         switch (args[2])
