@@ -24,7 +24,6 @@ namespace Non_Lethal_Dev_Console
         private string result = "";
         private TMP_FontAsset GameFont;
         private PlayerControllerB CurrentPlayer;
-        private Terminal Terminal;
 
         private void CommandRunner(string command)
         {
@@ -44,9 +43,7 @@ namespace Non_Lethal_Dev_Console
                             "help - Displays this message\n" +
                             "clear - Clears the command history\n" +
                             "help set - Shows available commands for 'set'\n" +
-                            "help get - Shows available commands for 'get'\n" +
-                            "help terminal - Shows available commands for the terminal\n" +
-                            "Type 'help 2' to see next commands";
+                            "help get - Shows available commands for 'get'";
                         break;
                     }
                     switch (args[1])
@@ -55,7 +52,7 @@ namespace Non_Lethal_Dev_Console
                         // Displays the second page of 'help'
                         case "2":
                             result = "Commands:\n" +
-                            "drop_all_held_items <player number> - Drops all held items";
+                            "";
                             break;
                         // Help section for 'set'
                         case "set":
@@ -102,11 +99,6 @@ namespace Non_Lethal_Dev_Console
                         case "get3":
                             result = "Commands:\n" +
                                 "get <player number> look_sensitivity - Returns the player's look sensitivity";
-                            break;
-                        case "terminal":
-                            result = "Commands:\n" +
-                                "get_credits - Returns the credits available to spend\n" +
-                                "set_credits <value> - Sets the credits available to spend";
                             break;
                     }
                     break;
@@ -200,11 +192,7 @@ namespace Non_Lethal_Dev_Console
                             result = "Error: Player not found";
                             break;
                         }
-                        if (args.Length == 2)
-                        {
-                            result = "Error: Invalid Arguments - Please specify what to get";
-                            break;
-                        }
+                        
                         switch (args[2])
                         {
                             // Returns the player's health
@@ -258,54 +246,6 @@ namespace Non_Lethal_Dev_Console
                     }
                     break;
 
-                // drop_all_items <player>
-                case "drop_all_held_items":
-                    {
-                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
-                        if (Player is null)
-                        {
-                            result = "Error: Player not found";
-                            break;
-                        }
-                        LC_Lib.DropAllHeldItems(Player);
-                        result = $"Dropped all held items in Player {args[1]} hand";
-                        break;
-                    }
-
-                // TERMINAL COMMANDS
-                case "terminal":
-                    if (Terminal is null)
-                    {
-                        result = "Error: Terminal not found (This has most likely happened because code was edited.)";
-                        break;
-                    }
-                    // If they only type the word "terminal"
-                    if (args.Length == 1)
-                    {
-                        result = "Error: Invalid Arguments - Please specify what to do with the terminal";
-                        break;
-                    }
-                    switch (args[1])
-                    {
-                        // Returns the credits available
-                        case "get_credits":
-                            result = $"Credits: {LC_Lib.GetGroupCredits(Terminal)}";
-                            break;
-                        // Sets the credits available
-                        case "set_credits":
-                            LC_Lib.SetGroupCredits(Terminal, int.Parse(args[2]));
-                            result = $"Set Group Credits to {args[2]}";
-                            break;
-                    }
-                    break;
-
-                // QUOTA SETTINGS
-                case "quota":
-                    {
-
-                    }
-                    break;
-
                 default:
                     result = "Error: Invalid Command";
                     break;
@@ -331,7 +271,6 @@ namespace Non_Lethal_Dev_Console
                 if (!LC_Lib.IsInGame()) return;
                 CurrentPlayer = LC_Lib.SearchForControlledPlayer();
                 GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
-                Terminal = LC_Lib.GetTerminal();
                 initialized = true;
                 return;
             }
