@@ -102,7 +102,8 @@ namespace Non_Lethal_Dev_Console
                             break;
                         case "get3":
                             result = "Commands:\n" +
-                                "get <player number> position";
+                                "get <player number> position - Returns the player's position in X,Y,Z coordinates\n" +
+                                "get <player number> is_drunk - Returns if the player is drunk";
                             break;
                     }
                     break;
@@ -157,7 +158,7 @@ namespace Non_Lethal_Dev_Console
                                 break;
                             // Sets the Player's Exhaustion
                             case "exhaust":
-                                LC_Lib.SetExhaustion(Player, bool.Parse(args[3]));
+                                LC_Lib.SetExhausted(Player, bool.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
                                 break;
                             // Sets the Player's Max Insanity
@@ -250,13 +251,25 @@ namespace Non_Lethal_Dev_Console
                             case "drunkness":
                                 result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
                                 break;
+                            // Returns if the player is drunk
+                            case "is_drunk":
+                                if (LC_Lib.IsDrunk(Player))
+                                {
+                                    result = $"Player {args[1]} is drunk";
+                                    break;
+                                }
+                                else
+                                {
+                                    result = $"Player {args[1]} is not drunk";
+                                    break;
+                                }
                             // Returns the player's grab distance
                             case "grab_distance":
                                 result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
                                 break;
                             // Returns the player's exhaustion
                             case "exhaust":
-                                result = $"Player {args[1]}'s Exhaustion: {LC_Lib.GetExhaustion(Player)}";
+                                result = $"Player {args[1]}'s Exhaustion: {LC_Lib.IsExhausted(Player)}";
                                 break;
                             // Returns the player's max insanity
                             case "max_insanity":
