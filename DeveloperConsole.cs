@@ -157,6 +157,45 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s Level to {args[3]}";
                                 break;
+                            // Set player's position
+                            case "position":
+                                if (args.Length != 6)
+                                {
+                                    result = "Error: Invalid Arguments";
+                                    break;
+                                }
+                                Vector3 CurrentPosition = LC_Lib.GetServerPosition(Player);
+                                float x, y, z;
+                                // - means x y or z position value
+                                // X position
+                                if (args[3] == "-")
+                                {
+                                    x = CurrentPosition.x;
+                                } else
+                                {
+                                    x = float.Parse(args[3]);
+                                }
+                                // Y position
+                                if (args[4] == "-")
+                                {
+                                    y = CurrentPosition.y;
+                                } else
+                                {
+                                    y = float.Parse(args[4]);
+                                }
+                                // Z position
+                                if (args[5] == "-")
+                                {
+                                    z = CurrentPosition.z;
+                                } else
+                                {
+                                    z = float.Parse(args[5]);
+                                }
+
+                                LC_Lib.TeleportPlayer(Player, new Vector3(x, y, z));
+                                result = $"Set Player {args[1]}'s Position to {x}, {y}, {z}\n" +
+                                    $"Player {args[1]}'s new position is {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
+                                break;
                         }
                     }
                     break;
