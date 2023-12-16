@@ -65,6 +65,7 @@
 - Jump
 - Climb_Speed
 - Drunkess
+- Is_Drunk
 - Drunk_Interia
 - Drunk_Recovery_Time
 - Grab_Distance
