@@ -87,8 +87,6 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetDrunkRecoveryTime(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s drunk recovery time to {args[3]}";
                                 break;
-                            
-
                             // Sets the Player's Grab Distance
                             case "grab_distance":
                                 LC_Lib.SetGrabDistance(Player, float.Parse(args[3]));
@@ -285,7 +283,7 @@ namespace Non_Lethal_Dev_Console
                     }
                     catch
                     {
-                        MelonLogger.Msg("Error: Failed to draw UI");
+                        MelonLogger.Msg("Oops an error has occured!");
                     }
                 }
 
@@ -319,6 +317,8 @@ namespace Non_Lethal_Dev_Console
                 {
                     if (Keyboard.current.backquoteKey.wasPressedThisFrame)
                     {
+                        // Check if player is in the game terminal
+                        if (LC_Lib.IsInTerminalMenu(CurrentPlayer)) return;
                         CommandInput.text = "";
                         if (DevConsole.gameObject.activeInHierarchy)
                         {
