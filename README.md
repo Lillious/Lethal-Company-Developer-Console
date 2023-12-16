@@ -62,6 +62,7 @@
 - Jump
 - Climb_Speed
 - Drunkess
+- Drunk_Interia
 - Grab_Distance
 - Exhaust
 - Max_Insanity
