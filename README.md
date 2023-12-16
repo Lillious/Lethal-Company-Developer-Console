@@ -74,5 +74,7 @@
 - Min_Velocity_To_Take_Damage
 - Level
 - Position
+- Hindered_Multiplier
+- Hindered
 
 #### Credits: [Contributors](https://github.com/Lillious/Lethal-Company-Developer-Console/graphs/contributors)
