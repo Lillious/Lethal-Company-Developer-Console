@@ -14,7 +14,7 @@
 <br>
 
 > [!TIP]
-> Don't know how to install? Review the information below
+> **Don't know how to install? Review the information below**
 
 ### MelonLoader
 - Download [MelonLoader.Installer.exe](https://github.com/LavaGang/MelonLoader/releases/latest)
@@ -28,17 +28,20 @@
 <br>
 
 ### BepInEx
-> [!WARNING]
-> Not supported at this time
 
 <br>
 
-# Commands
+> [!WARNING]
+> **Not supported at this time**
+
+<br>
+
+## Commands
 
 <br>
 
 > [!TIP]
-> Available console commands and usages
+> **Available console commands and usages**
 
 ### Set
 > [!NOTE]
@@ -69,3 +72,5 @@
 - Min_Velocity_To_Take_Damage
 - Level
 - Position
+
+#### Credits: [Contributors](https://github.com/Lillious/Lethal-Company-Developer-Console/graphs/contributors)
