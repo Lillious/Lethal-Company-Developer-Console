@@ -283,6 +283,18 @@ namespace Non_Lethal_Dev_Console
                                     result = $"Player {args[1]} is not under water";
                                     break;
                                 }
+                            // Check if player is dead
+                            case "is_dead":
+                                if (LC_Lib.IsDead(Player))
+                                {
+                                    result = $"Player {args[1]} is dead";
+                                    break;
+                                }
+                                else
+                                {
+                                    result = $"Player {args[1]} is not dead";
+                                    break;
+                                }
                         }
                     }
                     break;
