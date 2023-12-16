@@ -259,6 +259,30 @@ namespace Non_Lethal_Dev_Console
                             case "hindered":
                                 result = $"Player {args[1]}'s Hindered Status: {LC_Lib.IsHindered(Player)}";
                                 break;
+                            // Checks if the player is typing in chat
+                            case "is_typing":
+                                if (LC_Lib.IsTypingInChat(Player))
+                                {
+                                    result = $"Player {args[1]} is typing";
+                                    break;
+                                }
+                                else
+                                {
+                                    result = $"Player {args[1]} is not typing";
+                                    break;
+                                }
+                            // Check if player is under water
+                            case "is_under_water":
+                                if (LC_Lib.IsUnderWater(Player))
+                                {
+                                    result = $"Player {args[1]} is under water";
+                                    break;
+                                }
+                                else
+                                {
+                                    result = $"Player {args[1]} is not under water";
+                                    break;
+                                }
                         }
                     }
                     break;
