@@ -158,6 +158,16 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Set Player {args[1]}'s Position to {x}, {y}, {z}\n" +
                                     $"Player {args[1]}'s new position is {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
                                 break;
+                            // Sets  the player's hindered multiplier
+                            case "hindered_multiplier":
+                                LC_Lib.SetHinderedMultiplier(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Hindered Multiplier to {args[3]}";
+                                break;
+                            // Set player's hindered status
+                            case "hindered":
+                                LC_Lib.SetHindered(Player, int.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s Hindered Status to {args[3]}";
+                                break;
                         }
                     }
                     break;
@@ -240,6 +250,14 @@ namespace Non_Lethal_Dev_Console
                             case "position":
                                 Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
                                 result = $"Player {args[1]}'s Position: {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
+                                break;
+                            // Returns the player's hindered multiplier
+                            case "hindered_multiplier":
+                                result = $"Player {args[1]}'s Hindered Multiplier: {LC_Lib.GetHinderedMultiplier(Player)}";
+                                break;
+                            // Returns the player's hindered status
+                            case "hindered":
+                                result = $"Player {args[1]}'s Hindered Status: {LC_Lib.IsHindered(Player)}";
                                 break;
                         }
                     }
