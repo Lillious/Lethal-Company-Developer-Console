@@ -35,10 +35,15 @@ namespace Non_Lethal_Dev_Console
             switch (args[0])
             {
                 // Utilities
+                // Exits the game
                 case "exit":
+                    DevConsole.gameObject.SetActive(false);
                     Application.Quit();
                     break;
-
+                // Clears the console output
+                case "clear":
+                    CommandHistory.Clear();
+                    return;
                 // PLAYER COMMANDS
                 // set <player> <property> <value>
                 case "set":
@@ -71,7 +76,6 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetClimbSpeed(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s climb speed to {args[3]}";
                                 break;
-
                             // Sets the Player's Drunkness
                             case "drunkness":
                                 LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
@@ -250,8 +254,16 @@ namespace Non_Lethal_Dev_Console
             {
                 CommandHistory.Add(result);
             }
-            if (CommandHistory.Count > 10) CommandHistory.RemoveAt(0);
+            
+            UpdateCommandHistory();
+        }
+
+        private void UpdateCommandHistory()
+        {
+            CommandInput.text = "";
             CommandOutput.text = "";
+            if (CommandHistory.Count > 10) CommandHistory.RemoveAt(0);
+            if (CommandHistory.Count == 0) return;
             foreach (string cmd in CommandHistory)
             {
                 CommandOutput.text += "\n" + cmd;
@@ -283,7 +295,7 @@ namespace Non_Lethal_Dev_Console
                     }
                     catch
                     {
-                        MelonLogger.Msg("Oops an error has occured!");
+                        MelonLogger.Msg("Failed to create Developer Console!");
                     }
                 }
 
@@ -291,26 +303,21 @@ namespace Non_Lethal_Dev_Console
                 {
                     if (Keyboard.current.enterKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
                     {
-                        if (CommandInput.text.ToLower() == "clear")
-                        {
-                            CommandHistory.Clear();
-                            CommandOutput.text = "";
-                        }
-                        else
-                        {
-                            CommandHistory.Add(CommandInput.text);
-                            CommandRunner(CommandInput.text); // Execute command
 
-                        }
+                        CommandHistory.Add(CommandInput.text);
+                        CommandRunner(CommandInput.text); // Execute command
 
-                        CommandInput.text = "";
+                        UpdateCommandHistory();
                         CommandInput.Select();
                         CommandInput.ActivateInputField();
                     }
                 }
                 catch
                 {
-                    MelonLogger.Msg("Error: Failed to open dev console");
+                    CommandHistory.Add("Error: Failed to execute command");
+                    UpdateCommandHistory();
+                    CommandInput.Select();
+                    CommandInput.ActivateInputField();
                 }
 
                 try
