@@ -1,30 +1,78 @@
+# Lethal Company Developer Console
 
+<br>
 
-            _  _            _        _   _         _                 
-           | \| |___ _ _   | |   ___| |_| |_  __ _| |                
-           | .` / _ \ ' \  | |__/ -_)  _| ' \/ _` | |                
-           |_|\_\___/_||_| |____\___|\__|_||_\__,_|_|
-     ___              _                      ___                  _
-    |   \ _____ _____| |___ _ __  ___ _ _   / __|___ _ _  ___ ___| |___ 
-    | |) / -_) V / -_) / _ \ '_ \/ -_) '_| | (__/ _ \ ' \(_-</ _ \ / -_)
-    |___/\___|\_/\___|_\___/ .__/\___|_|    \___\___/_||_/__/\___/_\___|
-                           |_|                                          
-	    Version 0.1 ALPHA
+> [!IMPORTANT]
+> **Required Dependencies**
+> 
+> - [Lethal Company Mod Library](https://github.com/Lillious/Lethal-Company-Mod-Library)
 
+<br>
 
+## Install Instructions
 
-## Dependencies
-- https://github.com/Lillious/Lethal-Company-Mod-Library
-- https://github.com/LavaGang/MelonLoader **(Version 0.6.1)**
+<br>
 
-## General
-Despite this game's growing popularity, a developer console has yet to be implemented. Lillious and .Zer0 have set out to create 
-that exact thing - to not only be used for players but also for debugging use in-game for modders! We hope that in our endeavours,
-we are able to create something that will become essential within the modding community and bring ease to everyone's experiences <3
+> [!TIP]
+> Don't know how to install? Review the information below
 
-## Installation
-1. Please ensure that the appropriate dependencies have been downloaded and installed *(Refer to the beginning of the README for links)*.
-2. Place the "Lethal_Library.dll" in the /Lethal Company/Mods folder in the game directory.
-   - **IF YOU DO NOT SEE THE MODS FOLDER - RUN THE GAME WITH MELONLOADER INSTALLED. THE FOLDERS WILL THEN BE CREATED**
-3. Place the "Non-Lethal Dev Console.dll" in /Lethal Company/Mods in the game directory.
-4. Enjoy!
+### MelonLoader
+- Download [MelonLoader.Installer.exe](https://github.com/LavaGang/MelonLoader/releases/latest)
+- Run MelonLoader.Installer.exe
+- Click the **select** button.
+- Select Lethal Company.exe in your Game's Installation Folder.
+- Uncheck **Latest** and select version **v0.6.1** from the Drop-Down List.
+- Once the installation is successful, open the game through Steam.
+- Place **Lethal_Library.dll** and **Non-Lethal Dev Console.dll** into the newly created Mods folder inside the Game's Installation Folder.
+
+<br>
+
+### BepInEx
+> [!WARNING]
+> Not supported at this time
+
+<br>
+
+# Commands
+
+<br>
+
+> [!TIP]
+> Available console commands and usages
+
+### Help
+> [!NOTE]
+> Syntax: ``help <property | optional><page | optional>``
+> 
+> Example: `help`, ``help set`` or ``help set2``
+
+<hr>
+
+### Set
+> [!NOTE]
+> Syntax: ``set <player number> <property> <value(s)>``
+> 
+> Example: ``set 1 position 13.5 12 -14``
+
+<hr>
+
+### Get
+> [!NOTE]
+> Syntax: ``get <player number> <property>``
+> 
+> Example: ``get 1 position``
+
+<hr>
+
+### Available Properties
+- Health
+- Speed
+- Jump
+- Climb_Speed
+- Drunkess
+- Grab_Distance
+- Exhaust
+- Max_Insanity
+- Min_Velocity_To_Take_Damage
+- Level
+- Position
