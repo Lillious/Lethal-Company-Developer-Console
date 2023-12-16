@@ -40,14 +40,6 @@
 > [!TIP]
 > Available console commands and usages
 
-### Help
-> [!NOTE]
-> Syntax: ``help <property | optional><page | optional>``
-> 
-> Example: `help`, ``help set`` or ``help set2``
-
-<hr>
-
 ### Set
 > [!NOTE]
 > Syntax: ``set <player number> <property> <value(s)>``
