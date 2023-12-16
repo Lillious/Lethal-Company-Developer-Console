@@ -71,6 +71,7 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetClimbSpeed(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s climb speed to {args[3]}";
                                 break;
+
                             // Sets the Player's Drunkness
                             case "drunkness":
                                 LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
@@ -81,6 +82,13 @@ namespace Non_Lethal_Dev_Console
                                 LC_Lib.SetDrunknessInertia(Player, float.Parse(args[3]));
                                 result = $"Set Player {args[1]}'s drunk_inertia to {args[3]}";
                                 break;
+                            // Sets the Player's drunk recovery time
+                            case "drunk_recovery_time":
+                                LC_Lib.SetDrunkRecoveryTime(Player, float.Parse(args[3]));
+                                result = $"Set Player {args[1]}'s drunk recovery time to {args[3]}";
+                                break;
+                            
+
                             // Sets the Player's Grab Distance
                             case "grab_distance":
                                 LC_Lib.SetGrabDistance(Player, float.Parse(args[3]));
@@ -120,7 +128,8 @@ namespace Non_Lethal_Dev_Console
                                 if (args[3] == "-")
                                 {
                                     x = CurrentPosition.x;
-                                } else
+                                }
+                                else
                                 {
                                     x = float.Parse(args[3]);
                                 }
@@ -128,7 +137,8 @@ namespace Non_Lethal_Dev_Console
                                 if (args[4] == "-")
                                 {
                                     y = CurrentPosition.y;
-                                } else
+                                }
+                                else
                                 {
                                     y = float.Parse(args[4]);
                                 }
@@ -136,7 +146,8 @@ namespace Non_Lethal_Dev_Console
                                 if (args[5] == "-")
                                 {
                                     z = CurrentPosition.z;
-                                } else
+                                }
+                                else
                                 {
                                     z = float.Parse(args[5]);
                                 }
@@ -158,7 +169,7 @@ namespace Non_Lethal_Dev_Console
                             result = "Error: Player not found";
                             break;
                         }
-                        
+
                         switch (args[2])
                         {
                             // Returns the player's health
@@ -177,6 +188,7 @@ namespace Non_Lethal_Dev_Console
                             case "climb_speed":
                                 result = $"Player {args[1]}'s Climb Speed: {LC_Lib.GetClimbSpeed(Player)}";
                                 break;
+
                             // Returns the player's drunkness
                             case "drunkness":
                                 result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
@@ -197,6 +209,11 @@ namespace Non_Lethal_Dev_Console
                             case "drunk_inertia":
                                 result = $"Player {args[1]}'s Drunk Inertia: {LC_Lib.GetDrunknessInertia(Player)}";
                                 break;
+                            // Returns the player's drunk recovery time
+                            case "drunk_recovery_time":
+                                result = $"Player {args[1]}'s Drunk Recovery Time: {LC_Lib.GetDrunkRecoveryTime(Player)}";
+                                break;
+
                             // Returns the player's grab distance
                             case "grab_distance":
                                 result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
@@ -285,6 +302,7 @@ namespace Non_Lethal_Dev_Console
                         {
                             CommandHistory.Add(CommandInput.text);
                             CommandRunner(CommandInput.text); // Execute command
+
                         }
 
                         CommandInput.text = "";
