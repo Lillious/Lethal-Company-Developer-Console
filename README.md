@@ -76,5 +76,7 @@
 - Position
 - Hindered_Multiplier
 - Hindered
+- Is_Under_Water
+- Is_Typing
 
 #### Credits: [Contributors](https://github.com/Lillious/Lethal-Company-Developer-Console/graphs/contributors)
