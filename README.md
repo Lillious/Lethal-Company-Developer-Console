@@ -67,6 +67,13 @@
 - Hindered_Multiplier
 - Hindered
 
+### Available Properties without Player
+> [!NOTE]
+> Syntax: ``set <property> <value>``
+> 
+> Example: ``set group_credits 1000``
+- Group_Credits
+
 <hr>
 
 ### Get
@@ -80,6 +87,13 @@
 - Is_Under_Water
 - Is_Typing
 - Is_Dead
+
+### Available Properties without Player
+> [!NOTE]
+> Syntax: ``get <property> <value>``
+> 
+> Example: ``get group_credits 1000``
+- See available set commands without player
 
 <hr>
 
