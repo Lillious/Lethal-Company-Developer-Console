@@ -78,5 +78,6 @@
 - Hindered
 - Is_Under_Water
 - Is_Typing
+- Is_Dead
 
 #### Credits: [Contributors](https://github.com/Lillious/Lethal-Company-Developer-Console/graphs/contributors)
