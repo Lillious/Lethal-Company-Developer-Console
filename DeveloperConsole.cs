@@ -299,6 +299,42 @@ namespace Non_Lethal_Dev_Console
                     }
                     break;
 
+                // Actions
+                // action <player> <action>
+                case "action":
+                    {
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            switch (args[1])
+                            {
+                                case "add_helmet":
+                                    LC_Lib.AddHelmet();
+                                    result = $"Added helmet to Player {args[1]}'s head";
+                                    break;
+                                case "remove_helmet":
+                                    LC_Lib.RemoveHelmet();
+                                    result = $"Removed helmet from Player {args[1]}'s head";
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (args[2])
+                            {
+                                case "add_blood":
+                                    LC_Lib.AddBloodToPlayerBody(Player);
+                                    result = $"Added blood to Player {args[1]}'s body";
+                                    break;
+                                case "remove_blood":
+                                    LC_Lib.RemoveBloodFromPlayerBody(Player);
+                                    result = $"Removed blood from Player {args[1]}'s body";
+                                    break;
+                            }
+                        }
+                    }
+                    break;
+
                 default:
                     result = "Error: Invalid Command";
                     break;
@@ -347,9 +383,9 @@ namespace Non_Lethal_Dev_Console
                         DrawUI();
                         DevConsole.gameObject.SetActive(false);
                     }
-                    catch
+                    catch (System.Exception e)
                     {
-                        MelonLogger.Msg("Failed to create Developer Console!");
+                        MelonLogger.Msg($"An error occured: {e}");
                     }
                 }
 
@@ -366,8 +402,9 @@ namespace Non_Lethal_Dev_Console
                         CommandInput.ActivateInputField();
                     }
                 }
-                catch
+                catch (System.Exception e)
                 {
+                    MelonLogger.Msg($"An error occured: {e}");
                     CommandHistory.Add("Error: Failed to execute command");
                     UpdateCommandHistory();
                     CommandInput.Select();
