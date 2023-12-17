@@ -332,6 +332,24 @@ namespace Non_Lethal_Dev_Console
                                     break;
                             }
                         }
+                        break;
+                    }
+                case "teleport":
+                    {
+                        PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
+                        if (Player is null)
+                        {
+                            result = "Error: Player not found";
+                            break;
+                        }
+                        switch (args[2])
+                        {
+                            case "ship":
+                                Vector3 ShipPosition = LC_Lib.GetSpawnPoint(Player);
+                                LC_Lib.TeleportPlayer(Player, ShipPosition);
+                                result = $"Teleported Player {args[1]} to the ship";
+                                break;
+                        }
                     }
                     break;
 
