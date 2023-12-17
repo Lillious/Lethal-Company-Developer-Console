@@ -99,7 +99,7 @@
 
 ### Action
 > [!NOTE]
-> Syntax: ``action <player number | optional> <action>``
+> Syntax: ``action <player number | optional> <action> <property | optional>``
 > 
 > Example: ``action remove_helmet`` or ``action 1 add_blood``
 
@@ -108,6 +108,7 @@
 - Remove_Helmet
 - Add_Blood
 - Remove_Blood
+- No_Clip ``on | off``
 
 <hr>
 
