@@ -89,12 +89,23 @@
 > 
 > Example: ``action remove_helmet`` or ``action 1 add_blood``
 
-### Available Properties
+### Available Actions
 - Add_Helmet
 - Remove_Helmet
 - Add_Blood
 - Remove_Blood
 
-<br>
+<hr>
+
+### Teleport
+> [!NOTE]
+> Syntax: ``teleport <player number> <location>``
+> 
+> Example: ``teleport 1 ship``
+
+### Available Locations
+- Ship
+
+<hr>
 
 #### Credits: [Contributors](https://github.com/Lillious/Lethal-Company-Developer-Console/graphs/contributors)
