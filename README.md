@@ -49,16 +49,6 @@
 > 
 > Example: ``set 1 position 13.5 12 -14``
 
-<hr>
-
-### Get
-> [!NOTE]
-> Syntax: ``get <player number> <property>``
-> 
-> Example: ``get 1 position``
-
-<hr>
-
 ### Available Properties
 - Health
 - Speed
@@ -76,8 +66,35 @@
 - Position
 - Hindered_Multiplier
 - Hindered
+
+<hr>
+
+### Get
+> [!NOTE]
+> Syntax: ``get <player number> <property>``
+> 
+> Example: ``get 1 position``
+
+### Available Properties
+- See available properties for set
 - Is_Under_Water
 - Is_Typing
 - Is_Dead
+
+<hr>
+
+### Action
+> [!NOTE]
+> Syntax: ``action <player number | optional> <action>``
+> 
+> Example: ``action remove_helmet`` or ``action 1 add_blood``
+
+### Available Properties
+- Add_Helmet
+- Remove_Helmet
+- Add_Blood
+- Remove_Blood
+
+<br>
 
 #### Credits: [Contributors](https://github.com/Lillious/Lethal-Company-Developer-Console/graphs/contributors)
