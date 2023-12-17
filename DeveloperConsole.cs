@@ -51,123 +51,132 @@ namespace Non_Lethal_Dev_Console
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
                         if (Player is null)
                         {
-                            result = "Error: Player not found";
-                            break;
-                        }
-                        switch (args[2])
-                        {
-                            // Sets the Player's Health
-                            case "health":
-                                LC_Lib.SetPlayerHealth(Player, int.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s health to {args[3]}";
-                                break;
-                            // Sets the Player's Speed
-                            case "speed":
-                                LC_Lib.SetPlayerSpeed(Player, int.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s speed to {args[3]}";
-                                break;
-                            // Sets the Player's Jump Force
-                            case "jump":
-                                LC_Lib.SetPlayerJumpForce(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s jump force to {args[3]}";
-                                break;
-                            // Sets the Player's Climb Speed
-                            case "climb_speed":
-                                LC_Lib.SetClimbSpeed(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s climb speed to {args[3]}";
-                                break;
-                            // Sets the Player's Drunkness
-                            case "drunkness":
-                                LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s drunkness to {args[3]}";
-                                break;
-                            // Sets the Player's drunk inertia
-                            case "drunk_inertia":
-                                LC_Lib.SetDrunknessInertia(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s drunk_inertia to {args[3]}";
-                                break;
-                            // Sets the Player's drunk recovery time
-                            case "drunk_recovery_time":
-                                LC_Lib.SetDrunkRecoveryTime(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s drunk recovery time to {args[3]}";
-                                break;
-                            // Sets the Player's Grab Distance
-                            case "grab_distance":
-                                LC_Lib.SetGrabDistance(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Grab Distance to {args[3]}";
-                                break;
-                            // Sets the Player's Exhaustion
-                            case "exhaust":
-                                LC_Lib.SetExhausted(Player, bool.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
-                                break;
-                            // Sets the Player's Max Insanity
-                            case "max_insanity":
-                                LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
-                                break;
-                            // Sets the Player's Minimum Velocity To Take Damage
-                            case "min_velocity_to_take_damage":
-                                LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Minimum Velocity To Take Damage to {args[3]}";
-                                break;
-                            // Sets the Player's Level
-                            case "level":
-                                LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Level to {args[3]}";
-                                break;
-                            // Set player's position
-                            case "position":
-                                if (args.Length != 6)
-                                {
-                                    result = "Error: Invalid Arguments";
+                            switch (args[1])
+                            {
+                                case "group_credits":
+                                    Terminal terminal = LC_Lib.GetTerminal();
+                                    LC_Lib.SetGroupCredits(terminal, int.Parse(args[2]));
+                                    result = $"Player {args[1]}'s Group Credits: {LC_Lib.GetGroupCredits(terminal)}";
                                     break;
-                                }
-                                Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
-                                float x, y, z;
-                                // - means x y or z position value
-                                // X position
-                                if (args[3] == "-")
-                                {
-                                    x = CurrentPosition.x;
-                                }
-                                else
-                                {
-                                    x = float.Parse(args[3]);
-                                }
-                                // Y position
-                                if (args[4] == "-")
-                                {
-                                    y = CurrentPosition.y;
-                                }
-                                else
-                                {
-                                    y = float.Parse(args[4]);
-                                }
-                                // Z position
-                                if (args[5] == "-")
-                                {
-                                    z = CurrentPosition.z;
-                                }
-                                else
-                                {
-                                    z = float.Parse(args[5]);
-                                }
+                            }
+                        }
+                        else
+                        {
+                            switch (args[2])
+                            {
+                                // Sets the Player's Health
+                                case "health":
+                                    LC_Lib.SetPlayerHealth(Player, int.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s health to {args[3]}";
+                                    break;
+                                // Sets the Player's Speed
+                                case "speed":
+                                    LC_Lib.SetPlayerSpeed(Player, int.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s speed to {args[3]}";
+                                    break;
+                                // Sets the Player's Jump Force
+                                case "jump":
+                                    LC_Lib.SetPlayerJumpForce(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s jump force to {args[3]}";
+                                    break;
+                                // Sets the Player's Climb Speed
+                                case "climb_speed":
+                                    LC_Lib.SetClimbSpeed(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s climb speed to {args[3]}";
+                                    break;
+                                // Sets the Player's Drunkness
+                                case "drunkness":
+                                    LC_Lib.SetDrunkness(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s drunkness to {args[3]}";
+                                    break;
+                                // Sets the Player's drunk inertia
+                                case "drunk_inertia":
+                                    LC_Lib.SetDrunknessInertia(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s drunk_inertia to {args[3]}";
+                                    break;
+                                // Sets the Player's drunk recovery time
+                                case "drunk_recovery_time":
+                                    LC_Lib.SetDrunkRecoveryTime(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s drunk recovery time to {args[3]}";
+                                    break;
+                                // Sets the Player's Grab Distance
+                                case "grab_distance":
+                                    LC_Lib.SetGrabDistance(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Grab Distance to {args[3]}";
+                                    break;
+                                // Sets the Player's Exhaustion
+                                case "exhaust":
+                                    LC_Lib.SetExhausted(Player, bool.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Exhaustion to {args[3]}";
+                                    break;
+                                // Sets the Player's Max Insanity
+                                case "max_insanity":
+                                    LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
+                                    break;
+                                // Sets the Player's Minimum Velocity To Take Damage
+                                case "min_velocity_to_take_damage":
+                                    LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Minimum Velocity To Take Damage to {args[3]}";
+                                    break;
+                                // Sets the Player's Level
+                                case "level":
+                                    LC_Lib.SetLevelNumber(Player, int.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Level to {args[3]}";
+                                    break;
+                                // Set player's position
+                                case "position":
+                                    if (args.Length != 6)
+                                    {
+                                        result = "Error: Invalid Arguments";
+                                        break;
+                                    }
+                                    Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
+                                    float x, y, z;
+                                    // - means x y or z position value
+                                    // X position
+                                    if (args[3] == "-")
+                                    {
+                                        x = CurrentPosition.x;
+                                    }
+                                    else
+                                    {
+                                        x = float.Parse(args[3]);
+                                    }
+                                    // Y position
+                                    if (args[4] == "-")
+                                    {
+                                        y = CurrentPosition.y;
+                                    }
+                                    else
+                                    {
+                                        y = float.Parse(args[4]);
+                                    }
+                                    // Z position
+                                    if (args[5] == "-")
+                                    {
+                                        z = CurrentPosition.z;
+                                    }
+                                    else
+                                    {
+                                        z = float.Parse(args[5]);
+                                    }
 
-                                LC_Lib.TeleportPlayer(Player, new Vector3(x, y, z));
-                                result = $"Set Player {args[1]}'s Position to {x}, {y}, {z}\n" +
-                                    $"Player {args[1]}'s new position is {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
-                                break;
-                            // Sets  the player's hindered multiplier
-                            case "hindered_multiplier":
-                                LC_Lib.SetHinderedMultiplier(Player, float.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Hindered Multiplier to {args[3]}";
-                                break;
-                            // Set player's hindered status
-                            case "hindered":
-                                LC_Lib.SetHindered(Player, int.Parse(args[3]));
-                                result = $"Set Player {args[1]}'s Hindered Status to {args[3]}";
-                                break;
+                                    LC_Lib.TeleportPlayer(Player, new Vector3(x, y, z));
+                                    result = $"Set Player {args[1]}'s Position to {x}, {y}, {z}\n" +
+                                        $"Player {args[1]}'s new position is {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
+                                    break;
+                                // Sets  the player's hindered multiplier
+                                case "hindered_multiplier":
+                                    LC_Lib.SetHinderedMultiplier(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Hindered Multiplier to {args[3]}";
+                                    break;
+                                // Set player's hindered status
+                                case "hindered":
+                                    LC_Lib.SetHindered(Player, int.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Hindered Status to {args[3]}";
+                                    break;
+                            }
                         }
                     }
                     break;
@@ -178,123 +187,129 @@ namespace Non_Lethal_Dev_Console
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
                         if (Player is null)
                         {
-                            result = "Error: Player not found";
-                            break;
+                            switch (args[1]) {
+                                case "group_credits":
+                                Terminal terminal = LC_Lib.GetTerminal();
+                                result = $"Player {args[1]}'s Group Credits: {LC_Lib.GetGroupCredits(terminal)}";
+                                break;
+                            }
                         }
-
-                        switch (args[2])
+                        else
                         {
-                            // Returns the player's health
-                            case "health":
-                                result = $"Player {args[1]}'s health is {LC_Lib.GetPlayerHealth(Player)}";
-                                break;
-                            // Returns the player's speed
-                            case "speed":
-                                result = $"Player {args[1]}'s speed is {LC_Lib.GetPlayerSpeed(Player)}";
-                                break;
-                            // Returns the player's jump force
-                            case "jump":
-                                result = $"Player {args[1]}'s Jump Force: {LC_Lib.GetPlayerJumpForce(Player)}";
-                                break;
-                            // Returns the player's climb speed
-                            case "climb_speed":
-                                result = $"Player {args[1]}'s Climb Speed: {LC_Lib.GetClimbSpeed(Player)}";
-                                break;
+                            switch (args[2])
+                            {
+                                // Returns the player's health
+                                case "health":
+                                    result = $"Player {args[1]}'s health is {LC_Lib.GetPlayerHealth(Player)}";
+                                    break;
+                                // Returns the player's speed
+                                case "speed":
+                                    result = $"Player {args[1]}'s speed is {LC_Lib.GetPlayerSpeed(Player)}";
+                                    break;
+                                // Returns the player's jump force
+                                case "jump":
+                                    result = $"Player {args[1]}'s Jump Force: {LC_Lib.GetPlayerJumpForce(Player)}";
+                                    break;
+                                // Returns the player's climb speed
+                                case "climb_speed":
+                                    result = $"Player {args[1]}'s Climb Speed: {LC_Lib.GetClimbSpeed(Player)}";
+                                    break;
 
-                            // Returns the player's drunkness
-                            case "drunkness":
-                                result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
-                                break;
-                            // Returns if the player is drunk
-                            case "is_drunk":
-                                if (LC_Lib.IsDrunk(Player))
-                                {
-                                    result = $"Player {args[1]} is drunk";
+                                // Returns the player's drunkness
+                                case "drunkness":
+                                    result = $"Player {args[1]}'s Drunkness: {LC_Lib.GetDrunkness(Player)}";
                                     break;
-                                }
-                                else
-                                {
-                                    result = $"Player {args[1]} is not drunk";
+                                // Returns if the player is drunk
+                                case "is_drunk":
+                                    if (LC_Lib.IsDrunk(Player))
+                                    {
+                                        result = $"Player {args[1]} is drunk";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not drunk";
+                                        break;
+                                    }
+                                // Returns the player's drunkness inertia
+                                case "drunk_inertia":
+                                    result = $"Player {args[1]}'s Drunk Inertia: {LC_Lib.GetDrunknessInertia(Player)}";
                                     break;
-                                }
-                            // Returns the player's drunkness inertia
-                            case "drunk_inertia":
-                                result = $"Player {args[1]}'s Drunk Inertia: {LC_Lib.GetDrunknessInertia(Player)}";
-                                break;
-                            // Returns the player's drunk recovery time
-                            case "drunk_recovery_time":
-                                result = $"Player {args[1]}'s Drunk Recovery Time: {LC_Lib.GetDrunkRecoveryTime(Player)}";
-                                break;
+                                // Returns the player's drunk recovery time
+                                case "drunk_recovery_time":
+                                    result = $"Player {args[1]}'s Drunk Recovery Time: {LC_Lib.GetDrunkRecoveryTime(Player)}";
+                                    break;
 
-                            // Returns the player's grab distance
-                            case "grab_distance":
-                                result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
-                                break;
-                            // Returns the player's exhaustion
-                            case "exhaust":
-                                result = $"Player {args[1]}'s Exhaustion: {LC_Lib.IsExhausted(Player)}";
-                                break;
-                            // Returns the player's max insanity
-                            case "max_insanity":
-                                result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
-                                break;
-                            // Returns the player's minimum velocity to take damage
-                            case "min_velocity_to_take_damage":
-                                result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
-                                break;
-                            // Returns the player's level
-                            case "level":
-                                result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
-                                break;
-                            // Returns the player's position
-                            case "position":
-                                Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
-                                result = $"Player {args[1]}'s Position: {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
-                                break;
-                            // Returns the player's hindered multiplier
-                            case "hindered_multiplier":
-                                result = $"Player {args[1]}'s Hindered Multiplier: {LC_Lib.GetHinderedMultiplier(Player)}";
-                                break;
-                            // Returns the player's hindered status
-                            case "hindered":
-                                result = $"Player {args[1]}'s Hindered Status: {LC_Lib.IsHindered(Player)}";
-                                break;
-                            // Checks if the player is typing in chat
-                            case "is_typing":
-                                if (LC_Lib.IsTypingInChat(Player))
-                                {
-                                    result = $"Player {args[1]} is typing";
+                                // Returns the player's grab distance
+                                case "grab_distance":
+                                    result = $"Player {args[1]}'s Grab Distance: {LC_Lib.GetGrabDistance(Player)}";
                                     break;
-                                }
-                                else
-                                {
-                                    result = $"Player {args[1]} is not typing";
+                                // Returns the player's exhaustion
+                                case "exhaust":
+                                    result = $"Player {args[1]}'s Exhaustion: {LC_Lib.IsExhausted(Player)}";
                                     break;
-                                }
-                            // Check if player is under water
-                            case "is_under_water":
-                                if (LC_Lib.IsUnderWater(Player))
-                                {
-                                    result = $"Player {args[1]} is under water";
+                                // Returns the player's max insanity
+                                case "max_insanity":
+                                    result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
                                     break;
-                                }
-                                else
-                                {
-                                    result = $"Player {args[1]} is not under water";
+                                // Returns the player's minimum velocity to take damage
+                                case "min_velocity_to_take_damage":
+                                    result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
                                     break;
-                                }
-                            // Check if player is dead
-                            case "is_dead":
-                                if (LC_Lib.IsDead(Player))
-                                {
-                                    result = $"Player {args[1]} is dead";
+                                // Returns the player's level
+                                case "level":
+                                    result = $"Player {args[1]}'s Level: {LC_Lib.GetLevelNumber(Player)}";
                                     break;
-                                }
-                                else
-                                {
-                                    result = $"Player {args[1]} is not dead";
+                                // Returns the player's position
+                                case "position":
+                                    Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(Player);
+                                    result = $"Player {args[1]}'s Position: {CurrentPosition.x}, {CurrentPosition.y}, {CurrentPosition.z}";
                                     break;
-                                }
+                                // Returns the player's hindered multiplier
+                                case "hindered_multiplier":
+                                    result = $"Player {args[1]}'s Hindered Multiplier: {LC_Lib.GetHinderedMultiplier(Player)}";
+                                    break;
+                                // Returns the player's hindered status
+                                case "hindered":
+                                    result = $"Player {args[1]}'s Hindered Status: {LC_Lib.IsHindered(Player)}";
+                                    break;
+                                // Checks if the player is typing in chat
+                                case "is_typing":
+                                    if (LC_Lib.IsTypingInChat(Player))
+                                    {
+                                        result = $"Player {args[1]} is typing";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not typing";
+                                        break;
+                                    }
+                                // Check if player is under water
+                                case "is_under_water":
+                                    if (LC_Lib.IsUnderWater(Player))
+                                    {
+                                        result = $"Player {args[1]} is under water";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not under water";
+                                        break;
+                                    }
+                                // Check if player is dead
+                                case "is_dead":
+                                    if (LC_Lib.IsDead(Player))
+                                    {
+                                        result = $"Player {args[1]} is dead";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not dead";
+                                        break;
+                                    }
+                            }
                         }
                     }
                     break;
