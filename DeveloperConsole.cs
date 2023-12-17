@@ -465,7 +465,6 @@ namespace Non_Lethal_Dev_Console
 
             if (!initialized && LC_Lib.IsInGame())
             {
-                if (!LC_Lib.IsInGame()) return;
                 CurrentPlayer = LC_Lib.SearchForControlledPlayer();
                 CurrentPlayerController = CurrentPlayer.GetComponent<CharacterController>();
                 GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
@@ -475,41 +474,6 @@ namespace Non_Lethal_Dev_Console
 
             if (initialized && LC_Lib.IsInGame())
             {
-                /* Override values */
-                // NoClip
-                if (LC_Lib.IsNoClip())
-                {
-                    // Check if player is dead
-                    if(LC_Lib.IsDead(CurrentPlayer))
-                    {
-                        LC_Lib.ToggleNoclip(CurrentPlayer, false);
-                        return;
-                    }
-                    // Check if player is in the ship
-                    if (LC_Lib.IsInsideShip(CurrentPlayer)) return;
-
-                    CurrentPlayer.fallValue = 0;
-                    CurrentPlayer.fallValueUncapped = 0;
-                    if (Keyboard.current.spaceKey.isPressed)
-                    {
-                        CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.1f;
-                    } else if (Keyboard.current.leftCtrlKey.isPressed)
-                    {
-                        CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.1f;
-                    } else if (Keyboard.current.wKey.isPressed)
-                    {
-                        CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.1f;
-                    } else if (Keyboard.current.sKey.isPressed)
-                    {
-                        CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
-                    } else if (Keyboard.current.aKey.isPressed)
-                    {
-                        CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.1f;
-                    } else if (Keyboard.current.dKey.isPressed)
-                    {
-                        CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.1f;
-                    }
-                }
 
                 // Initialize Dev Console and hide it
                 // Check if dev console exists
@@ -573,6 +537,50 @@ namespace Non_Lethal_Dev_Console
                 catch
                 {
                     MelonLogger.Msg("Error: Failed to toggle Dev Console");
+                }
+
+                /* Override values */
+                // NoClip
+                if (LC_Lib.IsNoClip())
+                {
+                    // Check if player is dead
+                    if(LC_Lib.IsDead(CurrentPlayer))
+                    {
+                        LC_Lib.ToggleNoclip(CurrentPlayer, false);
+                        return;
+                    }
+                    // Check if player is in the ship
+                    if (LC_Lib.IsInsideShip(CurrentPlayer)) return;
+
+                    CurrentPlayer.fallValue = 0;
+                    CurrentPlayer.fallValueUncapped = 0;
+                    if (!DevConsole.gameObject.activeInHierarchy)
+                    {
+                        if (Keyboard.current.spaceKey.isPressed)
+                        {
+                            CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.1f;
+                        }
+                        else if (Keyboard.current.leftCtrlKey.isPressed)
+                        {
+                            CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.1f;
+                        }
+                        else if (Keyboard.current.wKey.isPressed)
+                        {
+                            CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.1f;
+                        }
+                        else if (Keyboard.current.sKey.isPressed)
+                        {
+                            CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
+                        }
+                        else if (Keyboard.current.aKey.isPressed)
+                        {
+                            CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.1f;
+                        }
+                        else if (Keyboard.current.dKey.isPressed)
+                        {
+                            CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.1f;
+                        }
+                    }
                 }
             }
         }
