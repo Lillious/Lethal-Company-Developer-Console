@@ -24,6 +24,7 @@ namespace Non_Lethal_Dev_Console
         private string result = "";
         private TMP_FontAsset GameFont;
         private PlayerControllerB CurrentPlayer;
+        private CharacterController CurrentPlayerController;
 
         private void CommandRunner(string command)
         {
@@ -39,24 +40,37 @@ namespace Non_Lethal_Dev_Console
                 case "exit":
                     DevConsole.gameObject.SetActive(false);
                     Application.Quit();
-                    break;
+                    return;
+
                 // Clears the console output
                 case "clear":
                     CommandHistory.Clear();
                     return;
+
                 // PLAYER COMMANDS
                 // set <player> <property> <value>
                 case "set":
+                    if (args.Length < 2)
+                    {
+                        result = "Error: Invalid command";
+                        break;
+                    }
                     {
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
                         if (Player is null)
                         {
                             switch (args[1])
                             {
+                                // Sets the player's group credits
                                 case "group_credits":
-                                    Terminal terminal = LC_Lib.GetTerminal();
-                                    LC_Lib.SetGroupCredits(terminal, int.Parse(args[2]));
-                                    result = $"Player {args[1]}'s Group Credits: {LC_Lib.GetGroupCredits(terminal)}";
+                                    {
+                                        Terminal terminal = LC_Lib.GetTerminal();
+                                        LC_Lib.SetGroupCredits(terminal, int.Parse(args[2]));
+                                        result = $"Group Credits: {LC_Lib.GetGroupCredits(terminal)}";
+                                    }
+                                    break;
+                                default:
+                                    result = "Error: Invalid command";
                                     break;
                             }
                         }
@@ -176,6 +190,9 @@ namespace Non_Lethal_Dev_Console
                                     LC_Lib.SetHindered(Player, int.Parse(args[3]));
                                     result = $"Set Player {args[1]}'s Hindered Status to {args[3]}";
                                     break;
+                                default:
+                                    result = "Error: Invalid command";
+                                    break;
                             }
                         }
                     }
@@ -183,15 +200,26 @@ namespace Non_Lethal_Dev_Console
 
                 // get <player> <property>
                 case "get":
+                    if (args.Length < 2)
+                    {
+                        result = "Error: Invalid command";
+                        break;
+                    }
                     {
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
                         if (Player is null)
                         {
                             switch (args[1]) {
+                                // Returns the player's group credits
                                 case "group_credits":
-                                Terminal terminal = LC_Lib.GetTerminal();
-                                result = $"Player {args[1]}'s Group Credits: {LC_Lib.GetGroupCredits(terminal)}";
+                                    {
+                                        Terminal terminal = LC_Lib.GetTerminal();
+                                        result = $"Group Credits: {LC_Lib.GetGroupCredits(terminal)}";
+                                    }
                                 break;
+                                default:
+                                    result = "Error: Invalid command";
+                                    break;
                             }
                         }
                         else
@@ -309,6 +337,9 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not dead";
                                         break;
                                     }
+                                    default:
+                                        result = "Error: Invalid command";
+                                    break;
                             }
                         }
                     }
@@ -317,6 +348,11 @@ namespace Non_Lethal_Dev_Console
                 // Actions
                 // action <player> <action>
                 case "action":
+                    if (args.Length < 2)
+                    {
+                        result = "Error: Invalid command";
+                        break;
+                    }
                     {
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
                         if (Player is null)
@@ -330,6 +366,26 @@ namespace Non_Lethal_Dev_Console
                                 case "remove_helmet":
                                     LC_Lib.RemoveHelmet();
                                     result = $"Removed helmet from Player {args[1]}'s head";
+                                    break;
+                                case "no_clip":
+                                    switch (args[2])
+                                    {
+                                        case "on":
+                                            if (LC_Lib.IsInsideShip(CurrentPlayer)) {
+                                                result = "Error: Player is inside the ship";
+                                                break;
+                                            }
+                                            LC_Lib.ToggleNoclip(CurrentPlayer, true);
+                                            result = $"Enabled No Clip";
+                                            break;
+                                        case "off":
+                                            LC_Lib.ToggleNoclip(CurrentPlayer, false);
+                                            result = $"Disabled No Clip";
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    result = "Error: Invalid command";
                                     break;
                             }
                         }
@@ -345,11 +401,22 @@ namespace Non_Lethal_Dev_Console
                                     LC_Lib.RemoveBloodFromPlayerBody(Player);
                                     result = $"Removed blood from Player {args[1]}'s body";
                                     break;
+                                default:
+                                    result = "Error: Invalid command";
+                                    break;
                             }
                         }
+                    }
+                    break;
+
+                // Teleports
+                // teleport <player> <location>
+                case "teleport":
+                    if (args.Length < 2)
+                    {
+                        result = "Error: Invalid command";
                         break;
                     }
-                case "teleport":
                     {
                         PlayerControllerB Player = LC_Lib.GetPlayer(args[1]);
                         if (Player is null)
@@ -400,6 +467,7 @@ namespace Non_Lethal_Dev_Console
             {
                 if (!LC_Lib.IsInGame()) return;
                 CurrentPlayer = LC_Lib.SearchForControlledPlayer();
+                CurrentPlayerController = CurrentPlayer.GetComponent<CharacterController>();
                 GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
                 initialized = true;
                 return;
@@ -407,6 +475,42 @@ namespace Non_Lethal_Dev_Console
 
             if (initialized && LC_Lib.IsInGame())
             {
+                /* Override values */
+                // NoClip
+                if (LC_Lib.IsNoClip())
+                {
+                    // Check if player is dead
+                    if(LC_Lib.IsDead(CurrentPlayer))
+                    {
+                        LC_Lib.ToggleNoclip(CurrentPlayer, false);
+                        return;
+                    }
+                    // Check if player is in the ship
+                    if (LC_Lib.IsInsideShip(CurrentPlayer)) return;
+
+                    CurrentPlayer.fallValue = 0;
+                    CurrentPlayer.fallValueUncapped = 0;
+                    if (Keyboard.current.spaceKey.isPressed)
+                    {
+                        CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.1f;
+                    } else if (Keyboard.current.leftCtrlKey.isPressed)
+                    {
+                        CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.1f;
+                    } else if (Keyboard.current.wKey.isPressed)
+                    {
+                        CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.1f;
+                    } else if (Keyboard.current.sKey.isPressed)
+                    {
+                        CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
+                    } else if (Keyboard.current.aKey.isPressed)
+                    {
+                        CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.1f;
+                    } else if (Keyboard.current.dKey.isPressed)
+                    {
+                        CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.1f;
+                    }
+                }
+
                 // Initialize Dev Console and hide it
                 // Check if dev console exists
                 if (DevConsole == null)
