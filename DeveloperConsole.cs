@@ -384,6 +384,18 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not alone";
                                         break;
                                     }
+                                // Checks if the player is inside the factory
+                                case "is_inside_factory":
+                                    if (LC_Lib.IsInsideFactory(Player))
+                                    {
+                                        result = $"Player {args[1]} is inside the factory";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is outside the factory";
+                                        break;
+                                    }
                                     default:
                                         result = "Error: Invalid command";
                                     break;
