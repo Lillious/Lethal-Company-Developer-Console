@@ -444,6 +444,19 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not holding an item";
                                         break;
                                     }
+                                // Checks if the player is inside the ship
+                                case "is_inside_ship":
+                                    if (LC_Lib.IsInsideShip(Player))
+                                    {
+                                        result = $"Player {args[1]} is inside the ship";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not inside the ship";
+                                        break;
+                                    }
+
                                     default:
                                         result = "Error: Invalid command";
                                     break;
