@@ -24,7 +24,6 @@ namespace Non_Lethal_Dev_Console
         private string result = "";
         private TMP_FontAsset GameFont;
         private PlayerControllerB CurrentPlayer;
-        private CharacterController CurrentPlayerController;
 
         private void CommandRunner(string command)
         {
@@ -599,7 +598,6 @@ namespace Non_Lethal_Dev_Console
             if (!initialized && LC_Lib.IsInGame())
             {
                 CurrentPlayer = LC_Lib.SearchForControlledPlayer();
-                CurrentPlayerController = CurrentPlayer.GetComponent<CharacterController>();
                 GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
                 initialized = true;
                 return;
@@ -687,7 +685,7 @@ namespace Non_Lethal_Dev_Console
 
                     CurrentPlayer.fallValue = 0;
                     CurrentPlayer.fallValueUncapped = 0;
-                    if (!DevConsole.gameObject.activeInHierarchy)
+                    if (!DevConsole.gameObject.activeInHierarchy && !LC_Lib.IsTypingInChat(CurrentPlayer))
                     {
                         if (Keyboard.current.spaceKey.isPressed)
                         {
