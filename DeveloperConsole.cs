@@ -128,6 +128,11 @@ namespace Non_Lethal_Dev_Console
                                     LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
                                     result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
                                     break;
+                                // Sets the Player's insanity speed multiplier
+                                case "insanity_speed_multiplier":
+                                    LC_Lib.SetInsanitySpeedMultiplier(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Insanity Speed Multiplier to {args[3]}";
+                                    break;
                                 // Sets the Player's Minimum Velocity To Take Damage
                                 case "min_velocity_to_take_damage":
                                     LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
@@ -279,6 +284,10 @@ namespace Non_Lethal_Dev_Console
                                 // Returns the player's max insanity
                                 case "max_insanity":
                                     result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
+                                    break;
+                                // Returns the player's insanity speed multiplier
+                                case "insanity_speed_multiplier":
+                                    result = $"Player {args[1]}'s Insanity Speed Multiplier: {LC_Lib.GetInsanitySpeedMultiplier(Player)}";
                                     break;
                                 // Returns the player's minimum velocity to take damage
                                 case "min_velocity_to_take_damage":
