@@ -46,6 +46,11 @@ namespace Non_Lethal_Dev_Console
                     CommandHistory.Clear();
                     return;
 
+                // Opens the help page on github
+                case "help":
+                    Application.OpenURL("https://github.com/Lillious/Lethal-Company-Developer-Console/blob/master/README.md");
+                break;
+
                 // PLAYER COMMANDS
                 // set <property> <value>
                 case "set":
