@@ -456,6 +456,19 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not inside the ship";
                                         break;
                                     }
+                                // Checks the player's two-handed value
+                                case "is_two_handed":
+                                    if (LC_Lib.IsTwoHanded(Player))
+                                    {
+                                        result = $"Player {args[1]} is two-handed";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not two-handed";
+                                        break;
+                                    }
+                                    
 
                                     default:
                                         result = "Error: Invalid command";
