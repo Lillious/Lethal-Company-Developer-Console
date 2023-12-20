@@ -372,6 +372,18 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not sinking";
                                         break;
                                     }
+                                // Check if the player is alone
+                                case "is_alone":
+                                    if (LC_Lib.IsAlone(Player))
+                                    {
+                                        result = $"Player {args[1]} is alone";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not alone";
+                                        break;
+                                    }
                                     default:
                                         result = "Error: Invalid command";
                                     break;
