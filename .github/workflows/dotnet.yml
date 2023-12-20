@@ -1,0 +1,41 @@
+name: Build and Release
+
+on:
+  push:
+      branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-2019
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Build the project
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Set up Git
+      run: |
+        git config --global user.email "logan.brown@tylertech.com"
+        git config --global user.name "Logan Brown"
+      
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: v1.${{ github.run_number }}-a
+        release_name: Release v1.${{ github.run_number }}-a
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: bin/Release/Non-Lethal Dev Console.dll
+        asset_name: Lethal_Library.dll
+        asset_content_type: application/x-msdownload
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
