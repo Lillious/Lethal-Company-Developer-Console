@@ -360,6 +360,18 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not sliding";
                                         break;
                                     }
+                                // Check if the player is sinking
+                                case "is_sinking":
+                                    if (LC_Lib.IsSinking(Player))
+                                    {
+                                        result = $"Player {args[1]} is sinking";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not sinking";
+                                        break;
+                                    }
                                     default:
                                         result = "Error: Invalid command";
                                     break;
