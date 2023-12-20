@@ -281,6 +281,7 @@ namespace Non_Lethal_Dev_Console
                                 case "exhaust":
                                     result = $"Player {args[1]}'s Exhaustion: {LC_Lib.IsExhausted(Player)}";
                                     break;
+
                                 // Returns the player's max insanity
                                 case "max_insanity":
                                     result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
@@ -289,6 +290,7 @@ namespace Non_Lethal_Dev_Console
                                 case "insanity_speed_multiplier":
                                     result = $"Player {args[1]}'s Insanity Speed Multiplier: {LC_Lib.GetInsanitySpeedMultiplier(Player)}";
                                     break;
+
                                 // Returns the player's minimum velocity to take damage
                                 case "min_velocity_to_take_damage":
                                     result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
@@ -344,6 +346,18 @@ namespace Non_Lethal_Dev_Console
                                     else
                                     {
                                         result = $"Player {args[1]} is not dead";
+                                        break;
+                                    }
+                                // Check if the player is sliding
+                                case "is_sliding":
+                                    if (LC_Lib.IsSliding(Player))
+                                    {
+                                        result = $"Player {args[1]} is sliding";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not sliding";
                                         break;
                                     }
                                     default:
