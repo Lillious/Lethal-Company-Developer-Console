@@ -396,6 +396,18 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is outside the factory";
                                         break;
                                     }
+                                // Checks if the player is inside the elevator
+                                case "is_inside_elevator":
+                                    if (LC_Lib.IsInsideElevator(Player))
+                                    {
+                                        result = $"Player {args[1]} is inside the elevator";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is outside the elevator";
+                                        break;
+                                    }
                                     default:
                                         result = "Error: Invalid command";
                                     break;
