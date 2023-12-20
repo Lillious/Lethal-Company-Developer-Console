@@ -35,7 +35,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: bin/Release/Non-Lethal Dev Console.dll
-        asset_name: Lethal_Library.dll
+        asset_name: Non-Lethal Dev Console.dll
         asset_content_type: application/x-msdownload
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
