@@ -408,6 +408,18 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is outside the elevator";
                                         break;
                                     }
+                                // Checks if the player is inspecting an item
+                                case "is_inspecting_item":
+                                    if (LC_Lib.IsInspectingItem(Player))
+                                    {
+                                        result = $"Player {args[1]} is inspecting an item";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not inspecting an item";
+                                        break;
+                                    }
                                     default:
                                         result = "Error: Invalid command";
                                     break;
