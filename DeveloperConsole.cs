@@ -128,6 +128,11 @@ namespace Non_Lethal_Dev_Console
                                     LC_Lib.SetMaxInsanity(Player, float.Parse(args[3]));
                                     result = $"Set Player {args[1]}'s Max Insanity to {args[3]}";
                                     break;
+                                // Sets the Player's insanity speed multiplier
+                                case "insanity_speed_multiplier":
+                                    LC_Lib.SetInsanitySpeedMultiplier(Player, float.Parse(args[3]));
+                                    result = $"Set Player {args[1]}'s Insanity Speed Multiplier to {args[3]}";
+                                    break;
                                 // Sets the Player's Minimum Velocity To Take Damage
                                 case "min_velocity_to_take_damage":
                                     LC_Lib.SetMinVelocityToTakeDamage(Player, float.Parse(args[3]));
@@ -276,10 +281,16 @@ namespace Non_Lethal_Dev_Console
                                 case "exhaust":
                                     result = $"Player {args[1]}'s Exhaustion: {LC_Lib.IsExhausted(Player)}";
                                     break;
+
                                 // Returns the player's max insanity
                                 case "max_insanity":
                                     result = $"Player {args[1]}'s Max Insanity: {LC_Lib.GetMaxInsanity(Player)}";
                                     break;
+                                // Returns the player's insanity speed multiplier
+                                case "insanity_speed_multiplier":
+                                    result = $"Player {args[1]}'s Insanity Speed Multiplier: {LC_Lib.GetInsanitySpeedMultiplier(Player)}";
+                                    break;
+
                                 // Returns the player's minimum velocity to take damage
                                 case "min_velocity_to_take_damage":
                                     result = $"Player {args[1]}'s Minimum Velocity To Take Damage: {LC_Lib.GetMinVelocityToTakeDamage(Player)}";
@@ -337,6 +348,128 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not dead";
                                         break;
                                     }
+                                // Check if the player is sliding
+                                case "is_sliding":
+                                    if (LC_Lib.IsSliding(Player))
+                                    {
+                                        result = $"Player {args[1]} is sliding";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not sliding";
+                                        break;
+                                    }
+                                // Check if the player is sinking
+                                case "is_sinking":
+                                    if (LC_Lib.IsSinking(Player))
+                                    {
+                                        result = $"Player {args[1]} is sinking";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not sinking";
+                                        break;
+                                    }
+                                // Check if the player is alone
+                                case "is_alone":
+                                    if (LC_Lib.IsAlone(Player))
+                                    {
+                                        result = $"Player {args[1]} is alone";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not alone";
+                                        break;
+                                    }
+                                // Checks if the player is inside the factory
+                                case "is_inside_factory":
+                                    if (LC_Lib.IsInsideFactory(Player))
+                                    {
+                                        result = $"Player {args[1]} is inside the factory";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is outside the factory";
+                                        break;
+                                    }
+                                // Checks if the player is inside the elevator
+                                case "is_inside_elevator":
+                                    if (LC_Lib.IsInsideElevator(Player))
+                                    {
+                                        result = $"Player {args[1]} is inside the elevator";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is outside the elevator";
+                                        break;
+                                    }
+                                // Checks if the player is inspecting an item
+                                case "is_inspecting_item":
+                                    if (LC_Lib.IsInspectingItem(Player))
+                                    {
+                                        result = $"Player {args[1]} is inspecting an item";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not inspecting an item";
+                                        break;
+                                    }
+                                // Checks if the player is climbing a ladder
+                                case "is_climbing_ladder":
+                                    if (LC_Lib.IsClimbingLadder(Player))
+                                    {
+                                        result = $"Player {args[1]} is climbing a ladder";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not climbing a ladder";
+                                        break;
+                                    }
+                                // Checks if the player is holding an item
+                                case "is_holding_item":
+                                    if (LC_Lib.IsHoldingItem(Player))
+                                    {
+                                        result = $"Player {args[1]} is holding an item";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not holding an item";
+                                        break;
+                                    }
+                                // Checks if the player is inside the ship
+                                case "is_inside_ship":
+                                    if (LC_Lib.IsInsideShip(Player))
+                                    {
+                                        result = $"Player {args[1]} is inside the ship";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not inside the ship";
+                                        break;
+                                    }
+                                // Checks the player's two-handed value
+                                case "is_two_handed":
+                                    if (LC_Lib.IsTwoHanded(Player))
+                                    {
+                                        result = $"Player {args[1]} is two-handed";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not two-handed";
+                                        break;
+                                    }
+                                    
+
                                     default:
                                         result = "Error: Invalid command";
                                     break;
