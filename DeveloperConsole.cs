@@ -432,6 +432,18 @@ namespace Non_Lethal_Dev_Console
                                         result = $"Player {args[1]} is not climbing a ladder";
                                         break;
                                     }
+                                // Checks if the player is holding an item
+                                case "is_holding_item":
+                                    if (LC_Lib.IsHoldingItem(Player))
+                                    {
+                                        result = $"Player {args[1]} is holding an item";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result = $"Player {args[1]} is not holding an item";
+                                        break;
+                                    }
                                     default:
                                         result = "Error: Invalid command";
                                     break;
