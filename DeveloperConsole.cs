@@ -517,6 +517,18 @@ namespace Non_Lethal_Dev_Console
                                 result = "Player did not just connect";
                                 break;
                             }
+                        // Returns if the player has disconnected
+                        case "has_disconnected":
+                            if (LC_Lib.HasDisconnected(CurrentPlayer))
+                            {
+                                result = "Player has disconnected";
+                                break;
+                            }
+                            else
+                            {
+                                result = "Player has not disconnected";
+                                break;
+                            }
                            
 
                             default:
