@@ -477,13 +477,26 @@ namespace Non_Lethal_Dev_Console
                             result = $"Player's sinking speed multiplier: {LC_Lib.GetSinkingSpeedMultiplier(CurrentPlayer)}";
                             break;
                         // Returns the player's place of death
-                        case "get_place_of_death":
+                        case "place_of_death":
                             result = $"Player's place of death: x: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).x}, y: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).y}, z: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).z}";
                             break;
                         // Returns the player's spawn point
-                        case "get_spawn_point":
+                        case "spawn_point":
                             result = $"Player's spawn point: x:{LC_Lib.GetSpawnPoint(CurrentPlayer).x}, y: {LC_Lib.GetSpawnPoint(CurrentPlayer).y}, z: {LC_Lib.GetSpawnPoint(CurrentPlayer).z}";
                             break;
+                        // Returns if the player is using the jetpack
+                        case "jetpack_controls":
+                            if (LC_Lib.GetJetpackControls(CurrentPlayer))
+                            {
+                                result = "Player is using jetpack";
+                                break;
+                            }
+                            else
+                            {
+                                result = "Player is not using jetpack";
+                                break;
+                            }
+                           
 
                             default:
                                 result = "Error: Invalid command";
