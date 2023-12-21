@@ -505,6 +505,18 @@ namespace Non_Lethal_Dev_Console
                         case "health_regen_timer":
                             result = $"Player's health regen timer: {LC_Lib.GetHealthRegenTimer(CurrentPlayer)}";
                             break;
+                        // Returns if the player just connected
+                        case "just_connected":
+                            if (LC_Lib.JustConnected(CurrentPlayer))
+                            {
+                                result = "Player just connected";
+                                break;
+                            }
+                            else
+                            {
+                                result = "Player did not just connect";
+                                break;
+                            }
                            
 
                             default:
