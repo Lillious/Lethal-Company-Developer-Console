@@ -102,6 +102,11 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetDrunkRecoveryTime(CurrentPlayer, float.Parse(args[2]));
                             result = $"Set Drunk_Recovery_Time to {args[2]}";
                             break;
+                        // Sets the Player's Health Regen Timer
+                        case "health_regen_timer":
+                            LC_Lib.SetHealthRegenTimer(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Set Health Regen Time to {args[2]}";
+                            break;
                         // Sets the Player's Grab Distance
                         case "grab_distance":
                             LC_Lib.SetGrabDistance(CurrentPlayer, float.Parse(args[2]));
@@ -496,6 +501,10 @@ namespace Non_Lethal_Dev_Console
                                 result = "Player is not using jetpack";
                                 break;
                             }
+                        // Returns the player's health regen timer
+                        case "health_regen_timer":
+                            result = $"Player's health regen timer: {LC_Lib.GetHealthRegenTimer(CurrentPlayer)}";
+                            break;
                            
 
                             default:
