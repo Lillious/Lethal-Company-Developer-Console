@@ -102,6 +102,11 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetDrunkRecoveryTime(CurrentPlayer, float.Parse(args[2]));
                             result = $"Set Drunk_Recovery_Time to {args[2]}";
                             break;
+                        // Sets the Player's Health Regen Timer
+                        case "health_regen_timer":
+                            LC_Lib.SetHealthRegenTimer(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Set Health Regen Time to {args[2]}";
+                            break;
                         // Sets the Player's Grab Distance
                         case "grab_distance":
                             LC_Lib.SetGrabDistance(CurrentPlayer, float.Parse(args[2]));
@@ -187,7 +192,17 @@ namespace Non_Lethal_Dev_Console
                         // Sets the players sinking speed multiplier
                         case "sinking_speed_multiplier":
                             LC_Lib.SetSinkingSpeedMultiplier(CurrentPlayer, float.Parse(args[2]));
-                            result = $"Player's sinking speed multiplier set to {args[2]}";
+                            result = $"Set sinking speed multiplier to {args[2]}";
+                            break;
+                        // Sets the player's sprint meter value
+                        case "sprint_meter":
+                            LC_Lib.SetSprintMeterValue(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Set sprint meter value to {args[2]}";
+                            break;
+                        // Sets the player's throw power
+                        case "throw_power":
+                            LC_Lib.SetThrowPower(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Set throw power to {args[2]}";
                             break;
                         default:
                             result = "Error: Invalid command";
@@ -496,7 +511,31 @@ namespace Non_Lethal_Dev_Console
                                 result = "Player is not using jetpack";
                                 break;
                             }
-                           
+                        // Returns the player's health regen timer
+                        case "health_regen_timer":
+                            result = $"Player's health regen timer: {LC_Lib.GetHealthRegenTimer(CurrentPlayer)}";
+                            break;
+                        // Returns the player's sprint meter value
+                        case "sprint_meter":
+                            result = $"Player Sprint Meter Value: {LC_Lib.GetSprintMeterValue(CurrentPlayer)}";
+                            break;
+                        // Returns the player's throw power
+                        case "throw_power":
+                            result = $"Player's Throw Power: {LC_Lib.GetThrowPower(CurrentPlayer)}";
+                            break;
+                        // Returns the player's ID
+                        case "player_id":
+                            result = $"Player's ID: {LC_Lib.GetPlayerID(CurrentPlayer)}";
+                            break;
+                        // Returns the player's suit ID
+                        case "player_suit_id":
+                            result = $"Player's Suit ID: {LC_Lib.GetPlayerSuitID(CurrentPlayer)}";
+                            break;
+                        // Returns the player's carry weight
+                        case "carry_weight":
+                            result = $"Player's Carry Weight: {LC_Lib.GetPlayerCarryWeight(CurrentPlayer)}";
+                            break;
+                        
 
                             default:
                                 result = "Error: Invalid command";
