@@ -20,7 +20,6 @@ namespace Non_Lethal_Dev_Console
         private TextMeshProUGUI CommandOutput;
         private List<string> CommandHistory = new List<string>();
         private Canvas DevConsole;
-        private bool initialized = false;
         private string result = "";
         private TMP_FontAsset GameFont;
         private PlayerControllerB CurrentPlayer;
@@ -444,7 +443,30 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Player is not two-handed";
                                 break;
                             }
-                            
+                        // Checks if the player is crouching
+                        case "is_crouching":
+                            if (LC_Lib.IsCrouching(CurrentPlayer))
+                            {
+                                result = $"Player is crouching";
+                                break;
+                            }
+                            else
+                            {
+                                result = $"Player is not crouching";
+                                break;
+                            }
+                        // Checks if the player's voice is muffled
+                        case "is_voice_muffled":
+                            if (LC_Lib.IsVoiceMuffled(CurrentPlayer))
+                            {
+                                result = $"Player's voice is muffled";
+                                break;
+                            }
+                            else
+                            {
+                                result = $"Player's voice is not muffled";
+                                break;
+                            }
 
                             default:
                                 result = "Error: Invalid command";
@@ -488,13 +510,13 @@ namespace Non_Lethal_Dev_Console
                                     break;
                             }
                             break;
-                        case "add_blood":
-                            LC_Lib.AddBloodToPlayerBody(CurrentPlayer);
-                            result = $"Added blood to body";
-                            break;
-                        case "remove_blood":
-                            LC_Lib.RemoveBloodFromPlayerBody(CurrentPlayer);
-                            result = $"Removed blood from body";
+                        case "eject":
+                            if (!LC_Lib.IsHost())
+                            {
+                                result = "Error: You are not the host"; break;
+                            }
+                            LC_Lib.Eject();
+                            result = $"Starting ejection sequence";
                             break;
                         default:
                             result = "Error: Invalid command";
@@ -548,15 +570,15 @@ namespace Non_Lethal_Dev_Console
         public override void OnUpdate()
         {
 
-            if (!initialized && LC_Lib.IsInGame())
+            if (!LC_Lib.IsInitialized() && LC_Lib.IsInGame())
             {
                 CurrentPlayer = LC_Lib.SearchForControlledPlayer();
                 GameFont = GameObject.Find("Weight").GetComponent<TextMeshProUGUI>().font;
-                initialized = true;
+                LC_Lib.SetInitialized(true);
                 return;
             }
 
-            if (initialized && LC_Lib.IsInGame())
+            if (LC_Lib.IsInitialized() && LC_Lib.IsInGame())
             {
 
                 // Initialize Dev Console and hide it

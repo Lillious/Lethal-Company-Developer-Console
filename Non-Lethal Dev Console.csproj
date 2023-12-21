@@ -43,10 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dependencies\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Lethal_Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dependencies\Lethal_Library.dll</HintPath>
-    </Reference>
+	  <Reference Include="Lethal_Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+		  <SpecificVersion>False</SpecificVersion>
+		  <HintPath>dependencies\Lethal_Library.dll</HintPath>
+	  </Reference>
     <Reference Include="MelonLoader, Version=0.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dependencies\MelonLoader.dll</HintPath>

@@ -94,6 +94,18 @@
 - Is_Under_Water
 - Is_Typing
 - Is_Dead
+- Is_Crouching
+- Is_Voice_Muffled
+- is_sliding
+- is_sinking
+- is_alone
+- is_inside_factory
+- is_inside_elevator
+- is_inspecting_item
+- is_climbing_ladder
+- is_holding_item
+- is_inside_ship
+- is_two_handed
 
 <hr>
 
@@ -106,9 +118,8 @@
 ### Available Actions
 - Add_Helmet
 - Remove_Helmet
-- Add_Blood
-- Remove_Blood
 - No_Clip ``on | off``
+- Eject
 
 <hr>
 
