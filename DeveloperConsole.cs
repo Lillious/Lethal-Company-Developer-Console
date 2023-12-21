@@ -443,11 +443,35 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Player is not two-handed";
                                 break;
                             }
+                        // Checks if the player is crouching
+                        case "is_crouching":
+                            if (LC_Lib.IsCrouching(CurrentPlayer))
+                            {
+                                result = $"Player is crouching";
+                                break;
+                            }
+                            else
+                            {
+                                result = $"Player is not crouching";
+                                break;
+                            }
+                        // Checks if the player's voice is muffled
+                        case "is_voice_muffled":
+                            if (LC_Lib.IsVoiceMuffled(CurrentPlayer))
+                            {
+                                result = $"Player's voice is muffled";
+                                break;
+                            }
+                            else
+                            {
+                                result = $"Player's voice is not muffled";
+                                break;
+                            }
 
-                        default:
-                            result = "Error: Invalid command";
-                        break;
-                    }
+                            default:
+                                result = "Error: Invalid command";
+                            break;
+                            }
                 break;
 
                 // Actions
