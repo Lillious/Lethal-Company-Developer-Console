@@ -184,6 +184,11 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetHindered(CurrentPlayer, int.Parse(args[2]));
                             result = $"Set Hindered Status to {args[2]}";
                             break;
+                        // Sets the players sinking speed multiplier
+                        case "sinking_speed_multiplier":
+                            LC_Lib.SetSinkingSpeedMultiplier(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Player's sinking speed multiplier set to {args[2]}";
+                            break;
                         default:
                             result = "Error: Invalid command";
                             break;
@@ -467,6 +472,31 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Player's voice is not muffled";
                                 break;
                             }
+                        // Returns the players sinking speed multiplier
+                        case "sinking_speed_multiplier":
+                            result = $"Player's sinking speed multiplier: {LC_Lib.GetSinkingSpeedMultiplier(CurrentPlayer)}";
+                            break;
+                        // Returns the player's place of death
+                        case "place_of_death":
+                            result = $"Player's place of death: x: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).x}, y: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).y}, z: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).z}";
+                            break;
+                        // Returns the player's spawn point
+                        case "spawn_point":
+                            result = $"Player's spawn point: x:{LC_Lib.GetSpawnPoint(CurrentPlayer).x}, y: {LC_Lib.GetSpawnPoint(CurrentPlayer).y}, z: {LC_Lib.GetSpawnPoint(CurrentPlayer).z}";
+                            break;
+                        // Returns if the player is using the jetpack
+                        case "jetpack_controls":
+                            if (LC_Lib.GetJetpackControls(CurrentPlayer))
+                            {
+                                result = "Player is using jetpack";
+                                break;
+                            }
+                            else
+                            {
+                                result = "Player is not using jetpack";
+                                break;
+                            }
+                           
 
                             default:
                                 result = "Error: Invalid command";
