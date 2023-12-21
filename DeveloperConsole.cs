@@ -184,6 +184,11 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetHindered(CurrentPlayer, int.Parse(args[2]));
                             result = $"Set Hindered Status to {args[2]}";
                             break;
+                        // Sets the players sinking speed multiplier
+                        case "sinking_speed_multiplier":
+                            LC_Lib.SetSinkingSpeedMultiplier(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Player's sinking speed multiplier set to {args[2]}";
+                            break;
                         default:
                             result = "Error: Invalid command";
                             break;
@@ -467,6 +472,31 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Player's voice is not muffled";
                                 break;
                             }
+                        // Returns the players sinking speed multiplier
+                        case "sinking_speed_multiplier":
+                            result = $"Player's sinking speed multiplier: {LC_Lib.GetSinkingSpeedMultiplier(CurrentPlayer)}";
+                            break;
+                        // Returns the player's place of death
+                        case "place_of_death":
+                            result = $"Player's place of death: x: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).x}, y: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).y}, z: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).z}";
+                            break;
+                        // Returns the player's spawn point
+                        case "spawn_point":
+                            result = $"Player's spawn point: x:{LC_Lib.GetSpawnPoint(CurrentPlayer).x}, y: {LC_Lib.GetSpawnPoint(CurrentPlayer).y}, z: {LC_Lib.GetSpawnPoint(CurrentPlayer).z}";
+                            break;
+                        // Returns if the player is using the jetpack
+                        case "jetpack_controls":
+                            if (LC_Lib.GetJetpackControls(CurrentPlayer))
+                            {
+                                result = "Player is using jetpack";
+                                break;
+                            }
+                            else
+                            {
+                                result = "Player is not using jetpack";
+                                break;
+                            }
+                           
 
                             default:
                                 result = "Error: Invalid command";
@@ -662,29 +692,161 @@ namespace Non_Lethal_Dev_Console
                     CurrentPlayer.fallValueUncapped = 0;
                     if (!DevConsole.gameObject.activeInHierarchy && !LC_Lib.IsTypingInChat(CurrentPlayer))
                     {
+                        // Up
                         if (Keyboard.current.spaceKey.isPressed)
                         {
-                            CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.1f;
+                            // Up Left
+                            if (Keyboard.current.aKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Up Right
+                            else if (Keyboard.current.dKey.isPressed) 
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Up Forward
+                            else if (Keyboard.current.wKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            // Up Backwards
+                            else if (Keyboard.current.sKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            else
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.up * 0.1f;
+                            }
                         }
+                        // Down
                         else if (Keyboard.current.leftCtrlKey.isPressed)
                         {
-                            CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.1f;
+                            // Down Left
+                            if (Keyboard.current.aKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Down Right
+                            else if (Keyboard.current.dKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Down Forward
+                            else if (Keyboard.current.wKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            // Down Backwards
+                            else if (Keyboard.current.sKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            else
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.up * 0.1f;
+                            }
                         }
-                        else if (Keyboard.current.wKey.isPressed)
-                        {
-                            CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.1f;
-                        }
-                        else if (Keyboard.current.sKey.isPressed)
-                        {
-                            CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
-                        }
+                        // Left
                         else if (Keyboard.current.aKey.isPressed)
                         {
-                            CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.1f;
-                        }
+                            // Left and Right
+                            if (Keyboard.current.dKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Left and Forward
+                            else if (Keyboard.current.wKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            // Left and Backwards
+                            else if (Keyboard.current.sKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            else
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.1f;
+                            }
+                        } 
+                        // Right
                         else if (Keyboard.current.dKey.isPressed)
                         {
-                            CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.1f;
+                            // Right and Left
+                            if (Keyboard.current.aKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Right and Forward
+                            else if (Keyboard.current.wKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            // Right and Backwards
+                            else if (Keyboard.current.sKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.07f;
+                            }
+                            else
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.1f;
+                            }
+                        }
+                        // Forward
+                        else if (Keyboard.current.wKey.isPressed)
+                        {
+                            // Forward and Left
+                            if (Keyboard.current.aKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Forward and Right
+                            else if (Keyboard.current.dKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                            }
+                            else
+                            {
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.forward * 0.1f;
+                            }
+                        }
+                        // Backwards
+                        else if (Keyboard.current.sKey.isPressed)
+                        {
+                            // Backwards and Left
+                            if (Keyboard.current.aKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.07f;
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.right * 0.07f;
+                            }
+                            // Backwards and Right
+                            else if (Keyboard.current.dKey.isPressed)
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.07f;
+                                CurrentPlayer.transform.position += CurrentPlayer.transform.right * 0.07f;
+                            }
+                            else
+                            {
+                                CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
+                            }
                         }
                     }
                 }
