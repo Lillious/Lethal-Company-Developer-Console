@@ -515,30 +515,6 @@ namespace Non_Lethal_Dev_Console
                         case "health_regen_timer":
                             result = $"Player's health regen timer: {LC_Lib.GetHealthRegenTimer(CurrentPlayer)}";
                             break;
-                        // Returns if the player just connected
-                        case "just_connected":
-                            if (LC_Lib.JustConnected(CurrentPlayer))
-                            {
-                                result = "Player just connected";
-                                break;
-                            }
-                            else
-                            {
-                                result = "Player did not just connect";
-                                break;
-                            }
-                        // Returns if the player has disconnected
-                        case "has_disconnected":
-                            if (LC_Lib.HasDisconnected(CurrentPlayer))
-                            {
-                                result = "Player has disconnected";
-                                break;
-                            }
-                            else
-                            {
-                                result = "Player has not disconnected";
-                                break;
-                            }
                         // Returns the player's sprint meter value
                         case "sprint_meter":
                             result = $"Player Sprint Meter Value: {LC_Lib.GetSprintMeterValue(CurrentPlayer)}";
@@ -559,18 +535,7 @@ namespace Non_Lethal_Dev_Console
                         case "carry_weight":
                             result = $"Player's Carry Weight: {LC_Lib.GetPlayerCarryWeight(CurrentPlayer)}";
                             break;
-                        // Returns if the player is able to control their character
-                        case "player_controller":
-                            if (LC_Lib.GetPlayerController(CurrentPlayer))
-                            {
-                                result = "Player is controlling";
-                                break;
-                            }
-                            else
-                            {
-                                result = "Player is not controlling";
-                                break;
-                            }
+                        
 
                             default:
                                 result = "Error: Invalid command";
