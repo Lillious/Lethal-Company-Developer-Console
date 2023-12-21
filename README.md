@@ -36,6 +36,19 @@
 
 <br>
 
+## Utility Commands
+
+<br>
+
+> [!TIP]
+> **Available console utility commands**
+
+- Help
+- Clear
+- Exit
+
+<br>
+
 ## Commands
 
 <br>
@@ -45,9 +58,9 @@
 
 ### Set
 > [!NOTE]
-> Syntax: ``set <player number> <property> <value(s)>``
+> Syntax: ``set <property> <value(s)>``
 > 
-> Example: ``set 1 position 13.5 12 -14``
+> Example: ``set position 13.5 12 -14``
 
 ### Available Properties
 - Health
@@ -66,21 +79,15 @@
 - Position
 - Hindered_Multiplier
 - Hindered
-
-### Available Properties without Player
-> [!NOTE]
-> Syntax: ``set <property> <value>``
-> 
-> Example: ``set group_credits 1000``
 - Group_Credits
 
 <hr>
 
 ### Get
 > [!NOTE]
-> Syntax: ``get <player number> <property>``
+> Syntax: ``get <property>``
 > 
-> Example: ``get 1 position``
+> Example: ``get position``
 
 ### Available Properties
 - See available properties for set
@@ -88,20 +95,13 @@
 - Is_Typing
 - Is_Dead
 
-### Available Properties without Player
-> [!NOTE]
-> Syntax: ``get <property> <value>``
-> 
-> Example: ``get group_credits 1000``
-- See available set commands without player
-
 <hr>
 
 ### Action
 > [!NOTE]
-> Syntax: ``action <player number | optional> <action> <property | optional>``
+> Syntax: ``action <action> <property | optional>``
 > 
-> Example: ``action remove_helmet`` or ``action 1 add_blood``
+> Example: ``action remove_helmet``
 
 ### Available Actions
 - Add_Helmet
@@ -114,9 +114,9 @@
 
 ### Teleport
 > [!NOTE]
-> Syntax: ``teleport <player number> <location>``
+> Syntax: ``teleport <location>``
 > 
-> Example: ``teleport 1 ship``
+> Example: ``teleport ship``
 
 ### Available Locations
 - Ship
