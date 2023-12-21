@@ -184,6 +184,11 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetHindered(CurrentPlayer, int.Parse(args[2]));
                             result = $"Set Hindered Status to {args[2]}";
                             break;
+                        // Sets the players sinking speed multiplier
+                        case "sinking_speed_multiplier":
+                            LC_Lib.SetSinkingSpeedMultiplier(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Player's sinking speed multiplier set to {args[2]}";
+                            break;
                         default:
                             result = "Error: Invalid command";
                             break;
@@ -467,6 +472,11 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Player's voice is not muffled";
                                 break;
                             }
+                        // Returns the players sinking speed multiplier
+                        case "sinking_speed_multiplier":
+                            result = $"Player's sinking speed multiplier: {LC_Lib.GetSinkingSpeedMultiplier(CurrentPlayer)}";
+                            break;
+
 
                             default:
                                 result = "Error: Invalid command";
