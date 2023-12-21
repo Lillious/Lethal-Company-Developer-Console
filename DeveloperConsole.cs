@@ -555,6 +555,10 @@ namespace Non_Lethal_Dev_Console
                         case "player_suit_id":
                             result = $"Player's Suit ID: {LC_Lib.GetPlayerSuitID(CurrentPlayer)}";
                             break;
+                        // Returns the player's carry weight
+                        case "carry_weight":
+                            result = $"Player's Carry Weight: {LC_Lib.GetPlayerCarryWeight(CurrentPlayer)}";
+                            break;
 
                             default:
                                 result = "Error: Invalid command";
