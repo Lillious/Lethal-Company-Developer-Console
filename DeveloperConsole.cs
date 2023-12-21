@@ -192,7 +192,12 @@ namespace Non_Lethal_Dev_Console
                         // Sets the players sinking speed multiplier
                         case "sinking_speed_multiplier":
                             LC_Lib.SetSinkingSpeedMultiplier(CurrentPlayer, float.Parse(args[2]));
-                            result = $"Player's sinking speed multiplier set to {args[2]}";
+                            result = $"Set sinking speed multiplier to {args[2]}";
+                            break;
+                        // Sets the player's sprint meter value
+                        case "sprint_meter":
+                            LC_Lib.SetSprintMeterValue(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Set sprint meter value to {args[2]}";
                             break;
                         default:
                             result = "Error: Invalid command";
@@ -529,7 +534,12 @@ namespace Non_Lethal_Dev_Console
                                 result = "Player has not disconnected";
                                 break;
                             }
-                           
+                        // Returns the player's sprint meter value
+                        case "sprint_meter":
+                            result = $"Player Sprint Meter Value: {LC_Lib.GetSprintMeterValue(CurrentPlayer)}";
+                            break;
+
+
 
                             default:
                                 result = "Error: Invalid command";
