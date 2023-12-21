@@ -204,6 +204,21 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetThrowPower(CurrentPlayer, float.Parse(args[2]));
                             result = $"Set throw power to {args[2]}";
                             break;
+                        // Sets the player's voice to be muffled
+                        case "voice_muffled":
+                            if (bool.Parse(args[2]))
+                            {
+                                LC_Lib.SetVoiceMuffled(CurrentPlayer, true);
+                                result = "Player's voice is now muffled";
+                                break;
+                            }
+                            else
+                            {
+                                LC_Lib.SetVoiceMuffled(CurrentPlayer, false);
+                                result = "Player's voice is now unmuffled";
+                                break;
+                            }
+                            
                         default:
                             result = "Error: Invalid command";
                             break;
