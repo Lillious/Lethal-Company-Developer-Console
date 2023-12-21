@@ -478,7 +478,11 @@ namespace Non_Lethal_Dev_Console
                             break;
                         // Returns the player's place of death
                         case "get_place_of_death":
-                            result = $"Player's palce of death: {LC_Lib.GetPlaceOfDeath(CurrentPlayer)}";
+                            result = $"Player's place of death: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).ToString()}";
+                            break;
+                        // Returns the player's spawn point
+                        case "get_spawn_point":
+                            result = $"Player's spawn point: {LC_Lib.GetSpawnPoint(CurrentPlayer).ToString()}";
                             break;
 
                             default:
