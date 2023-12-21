@@ -476,7 +476,10 @@ namespace Non_Lethal_Dev_Console
                         case "sinking_speed_multiplier":
                             result = $"Player's sinking speed multiplier: {LC_Lib.GetSinkingSpeedMultiplier(CurrentPlayer)}";
                             break;
-
+                        // Returns the player's place of death
+                        case "get_place_of_death":
+                            result = $"Player's palce of death: {LC_Lib.GetPlaceOfDeath(CurrentPlayer)}";
+                            break;
 
                             default:
                                 result = "Error: Invalid command";
