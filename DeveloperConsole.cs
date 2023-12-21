@@ -199,6 +199,11 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.SetSprintMeterValue(CurrentPlayer, float.Parse(args[2]));
                             result = $"Set sprint meter value to {args[2]}";
                             break;
+                        // Sets the player's throw power
+                        case "throw_power":
+                            LC_Lib.SetThrowPower(CurrentPlayer, float.Parse(args[2]));
+                            result = $"Set throw power to {args[2]}";
+                            break;
                         default:
                             result = "Error: Invalid command";
                             break;
@@ -538,7 +543,10 @@ namespace Non_Lethal_Dev_Console
                         case "sprint_meter":
                             result = $"Player Sprint Meter Value: {LC_Lib.GetSprintMeterValue(CurrentPlayer)}";
                             break;
-
+                        // Returns the player's throw power
+                        case "throw_power":
+                            result = $"Player's Throw Power: {LC_Lib.GetThrowPower(CurrentPlayer)}";
+                            break;
 
 
                             default:
