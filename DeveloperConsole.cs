@@ -547,6 +547,10 @@ namespace Non_Lethal_Dev_Console
                         case "throw_power":
                             result = $"Player's Throw Power: {LC_Lib.GetThrowPower(CurrentPlayer)}";
                             break;
+                        // Returns the player's ID
+                        case "player_id":
+                            result = $"Player's ID: {LC_Lib.GetPlayerID(CurrentPlayer)}";
+                            break;
 
 
                             default:
