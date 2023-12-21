@@ -559,6 +559,18 @@ namespace Non_Lethal_Dev_Console
                         case "carry_weight":
                             result = $"Player's Carry Weight: {LC_Lib.GetPlayerCarryWeight(CurrentPlayer)}";
                             break;
+                        // Returns if the player is able to control their character
+                        case "player_controller":
+                            if (LC_Lib.GetPlayerController(CurrentPlayer))
+                            {
+                                result = "Player is controlling";
+                                break;
+                            }
+                            else
+                            {
+                                result = "Player is not controlling";
+                                break;
+                            }
 
                             default:
                                 result = "Error: Invalid command";
