@@ -551,7 +551,10 @@ namespace Non_Lethal_Dev_Console
                         case "player_id":
                             result = $"Player's ID: {LC_Lib.GetPlayerID(CurrentPlayer)}";
                             break;
-
+                        // Returns the player's suit ID
+                        case "player_suit_id":
+                            result = $"Player's Suit ID: {LC_Lib.GetPlayerSuitID(CurrentPlayer)}";
+                            break;
 
                             default:
                                 result = "Error: Invalid command";
