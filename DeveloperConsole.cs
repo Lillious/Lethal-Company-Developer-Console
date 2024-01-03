@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Security.Policy;
 
 [assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "0.0.1", "Lillious, .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
@@ -27,11 +28,10 @@ namespace Non_Lethal_Dev_Console
         private void CommandRunner(string command)
         {
             if (string.IsNullOrEmpty(command)) return;
-            command = command.ToLower();
 
             var args = command.Split(' ');
 
-            switch (args[0])
+            switch (args[0].ToLower())
             {
                 // Utilities
                 // Exits the game
@@ -53,12 +53,13 @@ namespace Non_Lethal_Dev_Console
                 // PLAYER COMMANDS
                 // set <property> <value>
                 case "set":
-                    if (args.Length < 1)
+                    if (args.Length <= 2)
                     {
-                        result = "Error: Invalid command";
+                        result = "Error: Missing command arguments";
                         break;
                     }
-                    switch (args[1])
+
+                    switch (args[1].ToLower())
                     {
                         case "group_credits":
                             {
@@ -141,7 +142,7 @@ namespace Non_Lethal_Dev_Console
                         case "position":
                             if (args.Length != 5)
                             {
-                                result = "Error: Invalid Arguments";
+                                result = "Error: Missing command arguments";
                                 break;
                             }
                             Vector3 CurrentPosition = LC_Lib.GetPlayerPosition(CurrentPlayer);
@@ -220,19 +221,19 @@ namespace Non_Lethal_Dev_Console
                             }
                             
                         default:
-                            result = "Error: Invalid command";
+                            result = "Error: Invalid command argument";
                             break;
                     }
                 break;
 
                 // get <property>
                 case "get":
-                    if (args.Length < 1)
+                    if (args.Length <= 1)
                     {
-                        result = "Error: Invalid command";
+                        result = "Error: Missing command arguments";
                         break;
                     }
-                    switch (args[1])
+                    switch (args[1].ToLower())
                     {
                         // Returns the player's group credits
                         case "group_credits":
@@ -508,11 +509,19 @@ namespace Non_Lethal_Dev_Console
                             break;
                         // Returns the player's place of death
                         case "place_of_death":
-                            result = $"Player's place of death: x: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).x}, y: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).y}, z: {LC_Lib.GetPlaceOfDeath(CurrentPlayer).z}";
+                            // Check if player is dead first
+                            if (!LC_Lib.IsDead(CurrentPlayer))
+                            {
+                                result = "Error: Player is not dead";
+                                break;
+                            }
+                            Vector3 death_location = LC_Lib.GetPlaceOfDeath(CurrentPlayer);
+                            result = $"Player's place of death: x: {death_location.x}, y: {death_location.y}, z: {death_location.z}";
                             break;
                         // Returns the player's spawn point
                         case "spawn_point":
-                            result = $"Player's spawn point: x:{LC_Lib.GetSpawnPoint(CurrentPlayer).x}, y: {LC_Lib.GetSpawnPoint(CurrentPlayer).y}, z: {LC_Lib.GetSpawnPoint(CurrentPlayer).z}";
+                            Vector3 spawn_location = LC_Lib.GetSpawnPoint(CurrentPlayer);
+                            result = $"Player's spawn point: x:{spawn_location.x}, y: {spawn_location.y}, z: {spawn_location.z}";
                             break;
                         // Returns if the player is using the jetpack
                         case "jetpack_controls":
@@ -526,6 +535,8 @@ namespace Non_Lethal_Dev_Console
                                 result = "Player is not using jetpack";
                                 break;
                             }
+<<<<<<< HEAD
+=======
                         // Returns the player's health regen timer
                         case "health_regen_timer":
                             result = $"Player's health regen timer: {LC_Lib.GetHealthRegenTimer(CurrentPlayer)}";
@@ -551,22 +562,23 @@ namespace Non_Lethal_Dev_Console
                             result = $"Player's Carry Weight: {LC_Lib.GetPlayerCarryWeight(CurrentPlayer)}";
                             break;
                         
+>>>>>>> 526d2bbbcd666fc2b343d6ea22461a053cf6f339
 
-                            default:
-                                result = "Error: Invalid command";
+                        default:
+                            result = "Error: Invalid command argument";
                             break;
-                            }
+                    }
                 break;
 
                 // Actions
                 // action <action>
                 case "action":
-                    if (args.Length < 1)
+                    if (args.Length <= 1)
                     {
-                        result = "Error: Invalid command";
+                        result = "Error: Missing command arguments";
                         break;
                     }
-                    switch (args[1])
+                    switch (args[1].ToLower())
                     {
                         case "add_helmet":
                             LC_Lib.AddHelmet();
@@ -577,7 +589,7 @@ namespace Non_Lethal_Dev_Console
                             result = $"Removed helmet";
                             break;
                         case "no_clip":
-                            switch (args[2])
+                            switch (args[2].ToLower())
                             {
                                 case "on":
                                     if (LC_Lib.IsInsideShip(CurrentPlayer))
@@ -602,8 +614,87 @@ namespace Non_Lethal_Dev_Console
                             LC_Lib.Eject();
                             result = $"Starting ejection sequence";
                             break;
+                        case "infinite_sprint":
+                            switch (args[2].ToLower())
+                            {
+                                case "on":
+                                    LC_Lib.ToggleInfiniteSprint(true);
+                                    result = $"Enabled Infinite Sprint";
+                                    break;
+                                case "off":
+                                    LC_Lib.ToggleInfiniteSprint(false);
+                                    result = $"Disabled Infinite Sprint";
+                                    break;
+                            }
+                            break;
+
+                        case "damage":
+                            {
+                                if (args.Length <= 3)
+                                {
+                                    result = "Error: Missing command arguments";
+                                    break;
+                                }
+                                PlayerControllerB player = LC_Lib.GetPlayerByName(args[2]);
+                                // Check if player exists
+                                if (!player)
+                                {
+                                    result = $"Could not find player {args[1]}";
+                                    break;
+                                }
+
+                                int Damage = args.Length > 3 ? int.Parse(args[3]) : 0;
+
+                                LC_Lib.DamagePlayer(player, Damage);
+
+                                result = $"Damaged {LC_Lib.GetPlayerName(player)} for {Damage} damage";
+                            }
+                            break;
+
+                        case "heal":
+                            {
+                                if (args.Length <= 2)
+                                {
+                                    result = "Error: Missing command arguments";
+                                    break;
+                                }
+                                PlayerControllerB player = LC_Lib.GetPlayerByName(args[2]);
+                                // Check if player exists
+                                if (!player)
+                                {
+                                    result = $"Could not find player {args[2]}";
+                                    break;
+                                }
+
+                                LC_Lib.HealPlayer(player);
+
+                                result = $"Healed {LC_Lib.GetPlayerName(player)}";
+                            }
+                            break;
+
+                        case "kill":
+                            {
+                                if (args.Length <= 2)
+                                {
+                                    result = "Error: Missing command arguments";
+                                    break;
+                                }
+                                PlayerControllerB player = LC_Lib.GetPlayerByName(args[2]);
+                                // Check if player exists
+                                if (!player)
+                                {
+                                    result = $"Could not find player {args[2]}";
+                                    break;
+                                }
+
+                                LC_Lib.KillPlayer(player);
+
+                                result = $"Killed {LC_Lib.GetPlayerName(player)}";
+                            }
+                            break;
+
                         default:
-                            result = "Error: Invalid command";
+                            result = "Error: Invalid command argument";
                             break;
                     }
                 break;
@@ -611,23 +702,74 @@ namespace Non_Lethal_Dev_Console
                 // Teleports
                 // teleport <location>
                 case "teleport":
-                    if (args.Length < 1)
+                    if (args.Length <= 1)
                     {
-                        result = "Error: Invalid command";
+                        result = "Error: Missing command arguments";
                         break;
                     }
-                    switch (args[1])
+
+                    // Teleports current player to location
+                    switch (args[1].ToLower())
+                    {
+                        case "ship":
+                            Vector3 ShipPosition = LC_Lib.GetSpawnPoint(CurrentPlayer);
+                            LC_Lib.TeleportPlayer(CurrentPlayer, ShipPosition);
+                            result = $"Teleported to the ship";
+                            break;
+                    }
+
+                    // Teleport current player to another player
+                    if (args.Length == 2)
+                    {
+                        if (args[1].ToLower() == LC_Lib.GetPlayerName(CurrentPlayer).ToLower())
                         {
-                            case "ship":
-                                Vector3 ShipPosition = LC_Lib.GetSpawnPoint(CurrentPlayer);
-                                LC_Lib.TeleportPlayer(CurrentPlayer, ShipPosition);
-                                result = $"Teleported to the ship";
-                                break;
+                            result = $"Cannot teleport player to themselves";
+                            break;
                         }
-                break;
+
+                        PlayerControllerB player = LC_Lib.GetPlayerByName(args[1]);
+                        if (!player)
+                        {
+                            result = $"Could not find player {args[1]}";
+                            break;
+                        }
+
+                        LC_Lib.TeleportToPlayer(CurrentPlayer, LC_Lib.GetPlayerName(player));
+                        result = $"Teleported to {LC_Lib.GetPlayerName(player)}";
+                        break;
+                    }
+
+                    // Teleport a player to another player
+                    if (args.Length == 3)
+                    {
+                        if (args[1].ToLower() == args[2].ToLower())
+                        {
+                            result = $"Cannot teleport player to themselves";
+                            break;
+                        }
+
+                        PlayerControllerB player = LC_Lib.GetPlayerByName(args[1]);
+                        if (!player)
+                        {
+                            result = $"Could not find player {args[1]}";
+                            break;
+                        }
+
+                        PlayerControllerB player2 = LC_Lib.GetPlayerByName(args[2]);
+                        if (!player2)
+                        {
+                            result = $"Could not find player {args[2]}";
+                            break;
+                        }
+
+                        LC_Lib.TeleportPlayerToPlayer(LC_Lib.GetPlayerName(player), LC_Lib.GetPlayerName(player2));
+                        result = $"Teleported {LC_Lib.GetPlayerName(player)} to {LC_Lib.GetPlayerName(player2)}";
+                        break;
+                    }
+                    break;
 
                 default:
-                    result = "Error: Invalid Command";
+                    result = "Error: Invalid command";
                     break;
             }
 
@@ -730,6 +872,13 @@ namespace Non_Lethal_Dev_Console
                 }
 
                 /* Override values */
+
+                // Infinite Sprint
+                if (LC_Lib.IsInfiniteSprint())
+                {
+                    CurrentPlayer.isSprinting = false;
+                }
+
                 // NoClip
                 if (LC_Lib.IsNoClip())
                 {
@@ -942,6 +1091,7 @@ namespace Non_Lethal_Dev_Console
             var img = Dev_Console_InputField_Transform.GetComponent<Image>();
             img.type = Image.Type.Sliced;
             img.sprite = sprite;
+            sprite = img.sprite;
             CommandInput.targetGraphic = img;
             CommandInput.caretWidth = 0;
             var textArea = new GameObject("Text Area", typeof(RectMask2D));
