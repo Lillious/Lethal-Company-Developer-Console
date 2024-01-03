@@ -535,8 +535,6 @@ namespace Non_Lethal_Dev_Console
                                 result = "Player is not using jetpack";
                                 break;
                             }
-<<<<<<< HEAD
-=======
                         // Returns the player's health regen timer
                         case "health_regen_timer":
                             result = $"Player's health regen timer: {LC_Lib.GetHealthRegenTimer(CurrentPlayer)}";
@@ -561,8 +559,6 @@ namespace Non_Lethal_Dev_Console
                         case "carry_weight":
                             result = $"Player's Carry Weight: {LC_Lib.GetPlayerCarryWeight(CurrentPlayer)}";
                             break;
-                        
->>>>>>> 526d2bbbcd666fc2b343d6ea22461a053cf6f339
 
                         default:
                             result = "Error: Invalid command argument";
