@@ -128,7 +128,7 @@
 
 ### Teleport
 > [!NOTE]
-> Syntax: ``teleport <location>``
+> Syntax: ``teleport <location> or teleport <player> or teleport <player> <player2>``
 > 
 > Example: ``teleport ship``
 
