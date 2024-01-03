@@ -111,7 +111,7 @@
 
 ### Action
 > [!NOTE]
-> Syntax: ``action <action> <property | optional>``
+> Syntax: ``action <action> <property | optional> <property2 | optional>``
 > 
 > Example: ``action remove_helmet``
 
@@ -120,6 +120,9 @@
 - Remove_Helmet
 - No_Clip ``on | off``
 - Eject
+- Damage ``Player Name`` ``Damage``
+- Heal ``Player Name``
+- Kill ``Player Name``
 
 <hr>
 
