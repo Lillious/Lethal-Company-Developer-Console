@@ -919,6 +919,7 @@ namespace Non_Lethal_Dev_Console
 
                     CurrentPlayer.fallValue = 0;
                     CurrentPlayer.fallValueUncapped = 0;
+                    CurrentPlayer.ResetFallGravity();
                     if (!DevConsole.gameObject.activeInHierarchy && !LC_Lib.IsTypingInChat(CurrentPlayer))
                     {
                         // Up
