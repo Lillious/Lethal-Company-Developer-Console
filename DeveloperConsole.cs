@@ -714,6 +714,43 @@ namespace Non_Lethal_Dev_Console
                             }
                             break;
 
+                        case "blood":
+                            {
+                                if (args.Length <= 3)
+                                {
+                                    result = "Error: Missing command arguments";
+                                    break;
+                                }
+
+                                PlayerControllerB player = LC_Lib.GetPlayerByName(args[3]);
+                                // Check if player exists
+                                if (!player)
+                                {
+                                    result = $"Could not find player {args[3]}";
+                                    break;
+                                }
+
+                                switch (args[2])
+                                {
+                                    case "add":
+                                        {
+                                            LC_Lib.AddBloodToPlayerBody(player);
+                                            result = $"Added blood to {LC_Lib.GetPlayerName(player)}";
+                                        }
+                                        break;
+                                    case "remove":
+                                        {
+                                            LC_Lib.RemoveBloodFromPlayerBody(player);
+                                            result = $"Removed blood from {LC_Lib.GetPlayerName(player)}";
+                                        }
+                                        break;
+                                    default:
+                                        result = "Error: Invalid command argument";
+                                        break;
+                                }
+                            }
+                            break;
+
                         default:
                             result = "Error: Invalid command argument";
                             break;
