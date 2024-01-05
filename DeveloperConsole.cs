@@ -827,6 +827,21 @@ namespace Non_Lethal_Dev_Console
                     }
                 }
 
+                // Keybind toggles
+
+                // Toggle NoClip
+                if (Keyboard.current.zKey.wasPressedThisFrame)
+                {
+                    if (LC_Lib.IsNoClip())
+                    {
+                        LC_Lib.ToggleNoclip(CurrentPlayer, false);
+                    }
+                    else
+                    {
+                        LC_Lib.ToggleNoclip(CurrentPlayer, true);
+                    }
+                }
+
                 try
                 {
                     if (Keyboard.current.enterKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
@@ -869,6 +884,12 @@ namespace Non_Lethal_Dev_Console
                             CommandInput.Select();
                             CommandInput.ActivateInputField();
                         }
+                    }
+
+                    if (Keyboard.current.escapeKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
+                    {
+                        DevConsole.gameObject.SetActive(false);
+                        CurrentPlayer.enabled = true;
                     }
                 }
                 catch
@@ -1056,6 +1077,20 @@ namespace Non_Lethal_Dev_Console
                                 CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
                             }
                         }
+                    }
+                }
+
+                // Disable v keybind if player has dev console open to prevent voice chat spam
+                if (Keyboard.current.vKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
+                {
+                    if (LC_Lib.IsVoiceChatEnabled(CurrentPlayer))
+                    {
+                        LC_Lib.ToggleVoiceChat(CurrentPlayer, false);
+                    }
+                } else {
+                    if (!LC_Lib.IsVoiceChatEnabled(CurrentPlayer))
+                    {
+                        LC_Lib.ToggleVoiceChat(CurrentPlayer, true);
                     }
                 }
             }
