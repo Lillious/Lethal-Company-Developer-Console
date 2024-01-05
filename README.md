@@ -113,10 +113,10 @@
 > [!NOTE]
 > Syntax: ``action <action> <property | optional> <property2 | optional>``
 > 
-> Example: ``action remove_helmet``
+> Example: ``action helmet on``
 
 ### Available Actions
-- Add_Helmet
+- Helmet ``on | off``
 - Remove_Helmet
 - No_Clip ``on | off``
 - Eject
