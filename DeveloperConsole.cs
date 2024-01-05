@@ -637,7 +637,6 @@ namespace Non_Lethal_Dev_Console
                                     break;
                             }
                             break;
-
                         case "damage":
                             {
                                 if (args.Length <= 3)
@@ -660,7 +659,6 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Damaged {LC_Lib.GetPlayerName(player)} for {Damage} damage";
                             }
                             break;
-
                         case "heal":
                             {
                                 if (args.Length <= 2)
@@ -681,7 +679,6 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Healed {LC_Lib.GetPlayerName(player)}";
                             }
                             break;
-
                         case "kill":
                             {
                                 if (args.Length <= 2)
@@ -689,6 +686,19 @@ namespace Non_Lethal_Dev_Console
                                     result = "Error: Missing command arguments";
                                     break;
                                 }
+
+                                // Kill all players
+                                if (args[2] == "all")
+                                {
+                                    List<PlayerControllerB> Players = LC_Lib.GetAllPlayers();
+                                    foreach (PlayerControllerB _player in Players)
+                                    {
+                                        LC_Lib.KillPlayer(_player);
+                                    }
+                                    result = $"Killed all players";
+                                    break;
+                                }
+
                                 PlayerControllerB player = LC_Lib.GetPlayerByName(args[2]);
                                 // Check if player exists
                                 if (!player)
@@ -702,18 +712,6 @@ namespace Non_Lethal_Dev_Console
                                 result = $"Killed {LC_Lib.GetPlayerName(player)}";
                             }
                             break;
-
-                        case "kill_all":
-                            {
-                                List<PlayerControllerB> Players = LC_Lib.GetAllPlayers();
-                                foreach (PlayerControllerB player in Players)
-                                {
-                                    LC_Lib.KillPlayer(player);
-                                }
-                                result = $"Killed all players";
-                            }
-                            break;
-
                         case "blood":
                             {
                                 if (args.Length <= 3)
@@ -750,13 +748,11 @@ namespace Non_Lethal_Dev_Console
                                 }
                             }
                             break;
-
                         default:
                             result = "Error: Invalid command argument";
                             break;
                     }
                 break;
-
                 // Teleports
                 // teleport <location>
                 case "teleport":

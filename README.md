@@ -122,7 +122,7 @@
 - Eject
 - Damage ``Player Name`` ``Damage``
 - Heal ``Player Name``
-- Kill ``Player Name``
+- Kill ``Player Name | all``
 - Blood ``add | remove`` ``Player Name``
 
 <hr>
