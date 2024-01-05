@@ -62,7 +62,7 @@ namespace Non_Lethal_Dev_Console
                 // Opens the help page on github
                 case "help":
                     Application.OpenURL("https://github.com/Lillious/Lethal-Company-Developer-Console/blob/master/README.md");
-                break;
+                    return;
 
                 // PLAYER COMMANDS
                 // set <property> <value>
@@ -1138,41 +1138,42 @@ namespace Non_Lethal_Dev_Console
             Dev_Console_InputField_Transform.anchorMin = new Vector2(0.5f, 0);
             Dev_Console_InputField_Transform.anchorMax = new Vector2(0.5f, 0);
             Dev_Console_InputField_Transform.pivot = new Vector2(0.5f, 1);
-            Dev_Console_InputField_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 13);
-            Dev_Console_InputField_Transform.localPosition = new Vector3(10, (Dev_Console_InputField_Transform.localPosition.y + 13), 0);
-            Dev_Console_InputField.AddComponent<Image>().color = new Color(0, 0, 0, 0);
+            Dev_Console_InputField_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 7);
+            Dev_Console_InputField_Transform.localPosition = new Vector3(0, (Dev_Console_InputField_Transform.localPosition.y + 7), 0);
+            Dev_Console_InputField.AddComponent<Image>().color = new Color(0, 0, 0, 0.3f);
             CommandInput = Dev_Console_InputField.AddComponent<TMP_InputField>();
             var img = Dev_Console_InputField_Transform.GetComponent<Image>();
             img.type = Image.Type.Sliced;
             img.sprite = sprite;
             sprite = img.sprite;
             CommandInput.targetGraphic = img;
-            CommandInput.caretWidth = 0;
+            CommandInput.caretWidth = 1;
+            CommandInput.characterLimit = 50;
             var textArea = new GameObject("Text Area", typeof(RectMask2D));
             Dev_Console_InputField_Transform.GetComponent<TMP_InputField>().textViewport = textArea.GetComponent<RectTransform>();
             var textArea_Transform = textArea.GetComponent<RectTransform>();
             textArea_Transform.anchorMin = new Vector2(0.5f, 0);
             textArea_Transform.anchorMax = new Vector2(0.5f, 0);
             textArea_Transform.pivot = new Vector2(0.5f, 1);
-            textArea_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 13);
-            textArea_Transform.localPosition = new Vector3(0, (Dev_Console_InputField_Transform.localPosition.y + 13), 0);
+            textArea_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 7);
+            textArea_Transform.localPosition = new Vector3(0, (Dev_Console_InputField_Transform.localPosition.y + 7), 0);
             textArea.transform.SetParent(Dev_Console_InputField_Transform.transform);
             textArea.GetComponent<RectTransform>().localPosition = Vector3.zero;
             var text = new GameObject("Text", typeof(CanvasRenderer), typeof(TextMeshProUGUI));
-            text.GetComponent<TextMeshProUGUI>().fontSize = 8;
+            text.GetComponent<TextMeshProUGUI>().fontSize = 7;
             text.GetComponent<TextMeshProUGUI>().font = GameFont;
             text.transform.SetParent(textArea.transform);
             var text_Transform = text.GetComponent<RectTransform>();
             text_Transform.anchorMin = new Vector2(0.5f, 0);
             text_Transform.anchorMax = new Vector2(0.5f, 0);
             text_Transform.pivot = new Vector2(0.5f, 1);
-            text_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 13);
+            text_Transform.sizeDelta = new Vector2(scaler.referenceResolution.x, 8);
             text_Transform.localPosition = Vector3.zero;
             var text_Text = text.GetComponent<TextMeshProUGUI>();
             text_Text.color = new Color32(229, 89, 1, 255);
-            text_Text.fontSize = 8;
+            text_Text.fontSize = 6;
             text_Text.font = GameFont;
-            text_Text.alignment = TextAlignmentOptions.MidlineLeft;
+            text_Text.alignment = TextAlignmentOptions.TopLeft;
             Dev_Console_InputField_Transform.GetComponent<TMP_InputField>().textComponent = text.GetComponent<TextMeshProUGUI>();
             Dev_Console_InputField_Transform.GetComponent<TMP_InputField>().Select();
             Dev_Console_InputField_Transform.GetComponent<TMP_InputField>().ActivateInputField();
