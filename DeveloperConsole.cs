@@ -885,16 +885,16 @@ namespace Non_Lethal_Dev_Console
                             CommandInput.ActivateInputField();
                         }
                     }
-
-                    if (Keyboard.current.escapeKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
-                    {
-                        DevConsole.gameObject.SetActive(false);
-                        CurrentPlayer.enabled = true;
-                    }
                 }
                 catch
                 {
                     MelonLogger.Msg("Error: Failed to toggle Dev Console");
+                }
+
+                if (Keyboard.current.escapeKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
+                {
+                    DevConsole.gameObject.SetActive(false);
+                    CurrentPlayer.enabled = true;
                 }
 
                 /* Override values */
@@ -1077,20 +1077,6 @@ namespace Non_Lethal_Dev_Console
                                 CurrentPlayer.transform.position -= CurrentPlayer.transform.forward * 0.1f;
                             }
                         }
-                    }
-                }
-
-                // Disable v keybind if player has dev console open to prevent voice chat spam
-                if (Keyboard.current.vKey.wasPressedThisFrame && DevConsole.gameObject.activeInHierarchy)
-                {
-                    if (LC_Lib.IsVoiceChatEnabled(CurrentPlayer))
-                    {
-                        LC_Lib.ToggleVoiceChat(CurrentPlayer, false);
-                    }
-                } else {
-                    if (!LC_Lib.IsVoiceChatEnabled(CurrentPlayer))
-                    {
-                        LC_Lib.ToggleVoiceChat(CurrentPlayer, true);
                     }
                 }
             }
