@@ -14,7 +14,7 @@ namespace Non_Lethal_Dev_Console
 {
     public class DeveloperConsole : MelonMod
     {
-        private Library LC_Lib = new Library();
+        private readonly Library LC_Lib = new Library();
         [SerializeField] private Sprite sprite;
         private TMP_InputField CommandInput;
         private TextMeshProUGUI CommandOutput;
