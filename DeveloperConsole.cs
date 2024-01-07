@@ -12,21 +12,6 @@ using UnityEngine.InputSystem;
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 namespace Non_Lethal_Dev_Console
 {
-    public class Terminal_RCE : MonoBehaviour
-    {
-        public void Awake()
-        {
-            // Log that the script has been added to the terminal
-            Debug.Log("ScriptComponent has been added to the terminal");
-        }
-
-        public void Start()
-        {
-            // Deactivate the terminal
-            gameObject.SetActive(false);
-        }
-    }
-
     public class DeveloperConsole : MelonMod
     {
         private Library LC_Lib = new Library();
