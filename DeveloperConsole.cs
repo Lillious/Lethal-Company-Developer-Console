@@ -12,24 +12,9 @@ using UnityEngine.InputSystem;
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 namespace Non_Lethal_Dev_Console
 {
-    public class Terminal_RCE : MonoBehaviour
-    {
-        public void Awake()
-        {
-            // Log that the script has been added to the terminal
-            Debug.Log("ScriptComponent has been added to the terminal");
-        }
-
-        public void Start()
-        {
-            // Deactivate the terminal
-            gameObject.SetActive(false);
-        }
-    }
-
     public class DeveloperConsole : MelonMod
     {
-        private Library LC_Lib = new Library();
+        private readonly Library LC_Lib = new Library();
         [SerializeField] private Sprite sprite;
         private TMP_InputField CommandInput;
         private TextMeshProUGUI CommandOutput;
@@ -919,6 +904,7 @@ namespace Non_Lethal_Dev_Console
 
                     CurrentPlayer.fallValue = 0;
                     CurrentPlayer.fallValueUncapped = 0;
+                    CurrentPlayer.ResetFallGravity();
                     if (!DevConsole.gameObject.activeInHierarchy && !LC_Lib.IsTypingInChat(CurrentPlayer))
                     {
                         // Up
