@@ -28,11 +28,11 @@
 <br>
 
 ### BepInEx
-
-<br>
-
-> [!WARNING]
-> **Not supported at this time**
+- Download the appropriate [BepInEx](https://github.com/BepInEx/BepInEx/releases) version.
+- Extract contents to the Lethal Company root game folder.
+- Download the appropriate [BepInEx.MelonLoader.Loader](https://github.com/BepInEx/BepInEx.MelonLoader.Loader/releases) version for your chosen BepInEx version.
+- Extract contents to the Lethal Company root game folder.
+- Place **Lethal_Library.dll** and **Non-Lethal Dev Console.dll** into the <Game_Root>/MLLoader/Mods/ folder
 
 <br>
 
