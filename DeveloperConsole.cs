@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-[assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "0.0.1", "Lillious, .Zer0")]
+[assembly: MelonInfo(typeof(DeveloperConsole), "Non-Lethal Developer Console", "1.0.0", "Lillious & .Zer0")]
 [assembly: MelonGame("ZeekerssRBLX", "Lethal Company")]
 namespace Non_Lethal_Dev_Console
 {
